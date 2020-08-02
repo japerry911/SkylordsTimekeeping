@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import { Link, withRouter } from "react-router-dom";
@@ -15,6 +15,10 @@ const Footer = ({ location }) => {
       ? FOOTER_NONAUTH_POSTION_OBJECT[location.pathname]
       : -1
   );
+
+  useEffect(() => {
+    setValue(FOOTER_NONAUTH_POSTION_OBJECT[location.pathname]);
+  }, [location.pathname]);
 
   return (
     <BottomNavigation
