@@ -2,6 +2,10 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+import HeroHeader from "../../components/HeroHeader/HeroHeader";
+import Button from "@material-ui/core/Button";
+import Divider from "@material-ui/core/Divider";
+import { Link } from "react-router-dom";
 import { useStyles } from "./AboutStyles";
 
 const About = () => {
@@ -9,12 +13,17 @@ const About = () => {
 
   return (
     <div className={classes.mainDivStyle}>
+      <HeroHeader
+        headerText="ABOUT US"
+        imgUrl="https://skylord-timekeeping492193924349324.s3.us-east-2.amazonaws.com/About/jf-brou-915UJQaxtrk-unsplash+(2).jpg"
+      />
       <Grid container justify="center">
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12} align="center">
           <Paper className={classes.paperStyle}>
             <Typography variant="h2" className={classes.titleStyle}>
               ABOUT US
             </Typography>
+            <Divider className={classes.dividerStyle} />
             <figure className={classes.logoFigureStyle}>
               <img
                 alt="Skylord's Timekeeping Logo"
@@ -47,6 +56,13 @@ const About = () => {
               a feugiat nunc hendrerit vestibulum. Nunc et mauris sit amet ante
               porta commodo.
             </Typography>
+            <Button
+              className={classes.ctaButtonStyle}
+              component={Link}
+              to="/register-user"
+            >
+              Create an Account
+            </Button>
           </Paper>
         </Grid>
       </Grid>
