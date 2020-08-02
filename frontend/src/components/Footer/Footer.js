@@ -11,7 +11,7 @@ import { useStyles } from "./FooterStyles";
 const Footer = ({ location }) => {
   const classes = useStyles();
   const [value, setValue] = useState(
-    FOOTER_NONAUTH_POSTION_OBJECT[location.pathname]
+    FOOTER_NONAUTH_POSTION_OBJECT[location.pathname] !== undefined
       ? FOOTER_NONAUTH_POSTION_OBJECT[location.pathname]
       : -1
   );
@@ -23,6 +23,7 @@ const Footer = ({ location }) => {
         setValue(newValue);
       }}
       showLabels
+      className={classes.footerStyle}
     >
       {NONAUTH_ROUTES_ARRAY.map((routeObject, index) => {
         return (
@@ -32,6 +33,10 @@ const Footer = ({ location }) => {
             icon={<routeObject.icon />}
             component={Link}
             to={routeObject.path}
+            className={classes.tabStyle}
+            classes={{
+              selected: classes.tabSelectedStyle,
+            }}
           />
         );
       })}
