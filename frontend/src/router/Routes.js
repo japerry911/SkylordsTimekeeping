@@ -5,6 +5,7 @@ import About from "../pages/About/About";
 import Contact from "../pages/Contact/Contact";
 import SignIn from "../pages/SignIn/SignIn";
 import ScrollToTop from "./ScrollToTop";
+import CreateAccount from "../pages/CreateAccount/CreateAccount";
 
 export default () => (
   <Fragment>
@@ -17,5 +18,7 @@ export default () => (
     <Route exact path="/contact" component={Contact} />
 
     <Route exact path="/sign-in" component={SignIn} />
+
+    <Route exact path="/register-user" component={CreateAccount} />
   </Fragment>
 );
