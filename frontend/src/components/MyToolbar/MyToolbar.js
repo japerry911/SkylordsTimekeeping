@@ -4,6 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Typography from "@material-ui/core/Typography";
+import { Link } from "react-router-dom";
 import { useStyles } from "./ToolbarStyles";
 
 const MyToolbar = ({ title, onMenuClick }) => {
@@ -12,7 +13,16 @@ const MyToolbar = ({ title, onMenuClick }) => {
   return (
     <Fragment>
       <AppBar>
-        <Toolbar>
+        <Toolbar className={classes.toolbarStyle}>
+          <figure className={classes.figureStyle}>
+            <Link to="/">
+              <img
+                alt="Skylord's Timekeeping Logo"
+                src="https://skylord-timekeeping492193924349324.s3.us-east-2.amazonaws.com/Logos/logo_transparent_background.png"
+                className={classes.logoStyle}
+              />
+            </Link>
+          </figure>
           <IconButton
             className={classes.menuButton}
             color="inherit"
