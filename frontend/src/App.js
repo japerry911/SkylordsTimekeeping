@@ -6,7 +6,7 @@ import MyAppBar from "./components/MyAppBar/MyAppBar";
 
 function App() {
   return (
-    <div>
+    <div className="app">
       <header>
         <MyAppBar />
       </header>

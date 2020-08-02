@@ -1,14 +1,11 @@
 import React from "react";
+import Grid from "@material-ui/core/Grid";
 import { useStyles } from "./HomeStyles";
 
 const Home = () => {
-  const styles = useStyles();
+  const classes = useStyles();
 
-  return (
-    <div>
-      <h1>Home</h1>
-    </div>
-  );
+  return <div className={classes.mainDivStyle}></div>;
 };
 
 export default Home;
