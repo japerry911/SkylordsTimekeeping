@@ -21,7 +21,7 @@ const MyToolbar = ({ title, onMenuClick }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h3" color="inherit" className={classes.flex}>
+          <Typography variant="h6" color="inherit" className={classes.flex}>
             {title}
           </Typography>
         </Toolbar>
