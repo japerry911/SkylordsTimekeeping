@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import MyToolbar from "../MyToolbar/MyToolbar";
 import MyDrawer from "../MyDrawer/MyDrawer";
+import { withRouter } from "react-router-dom";
+import { ROUTES_OBJECT } from "../../router/routeArrsObjs";
 import { useStyles } from "./AppBarStyles";
 
-const MyAppBar = () => {
+const MyAppBar = ({ location }) => {
   const classes = useStyles();
 
   const [drawer, setDrawer] = useState(false);
-  const [title, setTitle] = useState("Home");
+  const [title, setTitle] = useState(
+    ROUTES_OBJECT[location.pathname] === undefined
+      ? "Unknown Page"
+      : ROUTES_OBJECT[location.pathname]
+  );
 
   const toggleDrawer = () => {
     setDrawer(!drawer);
@@ -21,4 +27,4 @@ const MyAppBar = () => {
   );
 };
 
-export default MyAppBar;
+export default withRouter(MyAppBar);
