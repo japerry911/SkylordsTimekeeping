@@ -1,3 +1,3 @@
-##...In Progress...
-###React JS Frontend
-###GoLang Backend
+## ...In Progress...
+### React JS Frontend
+### GoLang Backend
