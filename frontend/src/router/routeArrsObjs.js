@@ -16,3 +16,10 @@ export const ROUTES_OBJECT = {
   "/contact": "Contact",
   "/sign-in": "Sign In",
 };
+
+export const FOOTER_NONAUTH_POSTION_OBJECT = {
+  "/": 0,
+  "/about": 1,
+  "/contact": 2,
+  "/sign-in": 3,
+};

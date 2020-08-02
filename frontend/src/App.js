@@ -1,8 +1,8 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Routes from "./router/Routes";
 import MyAppBar from "./components/MyAppBar/MyAppBar";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -13,6 +13,9 @@ function App() {
       <main>
         <Routes />
       </main>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 }

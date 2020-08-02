@@ -22,10 +22,11 @@ const MyDrawer = ({ open, onClose, setTitle }) => {
       }}
     >
       <List>
-        {NONAUTH_ROUTES_ARRAY.map((routeObject) => {
+        {NONAUTH_ROUTES_ARRAY.map((routeObject, index) => {
           return (
             <ListItem
               button
+              key={index}
               onClick={() => {
                 setTitle(routeObject.title);
                 onClose();
