@@ -6,6 +6,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   tabStyle: {
     color: theme.colors.white,
+    border: `2pt solid ${theme.palette.primary.main}`,
   },
   tabSelectedStyle: {
     backgroundColor: theme.palette.secondary.main,
