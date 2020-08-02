@@ -40,6 +40,7 @@ export const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.secondary.main,
       border: `3pt solid ${theme.palette.primary.main}`,
       color: theme.palette.primary.main,
+      transition: "220ms ease-in-out",
     },
   },
 }));
