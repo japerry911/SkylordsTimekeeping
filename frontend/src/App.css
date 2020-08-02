@@ -1,0 +1,10 @@
+main {
+  height: 100%;
+}
+
+.app,
+html,
+body,
+#root {
+  height: 100%;
+}

@@ -1,18 +1,25 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Routes from "./router/Routes";
 import MyAppBar from "./components/MyAppBar/MyAppBar";
+import Footer from "./components/Footer/Footer";
+import { ThemeProvider } from "@material-ui/core/styles";
+import theme from "./theme/theme";
 
 function App() {
   return (
-    <div>
-      <header>
-        <MyAppBar />
-      </header>
-      <main>
-        <Routes />
-      </main>
+    <div className="app">
+      <ThemeProvider theme={theme}>
+        <header>
+          <MyAppBar />
+        </header>
+        <main>
+          <Routes />
+        </main>
+        <footer>
+          <Footer />
+        </footer>
+      </ThemeProvider>
     </div>
   );
 }
