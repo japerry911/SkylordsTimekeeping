@@ -8,8 +8,9 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../../redux/actions/usersActions";
-import { useStyles } from "./SignInStyles";
+import { handleOpen } from "../../redux/actions/snackbarActions";
 import Spinner from "../../components/Spinner/Spinner";
+import { useStyles } from "./SignInStyles";
 
 const SignIn = ({ history }) => {
   const classes = useStyles();
@@ -26,7 +27,14 @@ const SignIn = ({ history }) => {
     const result = await dispatch(signIn(username, password));
 
     if (result) {
+      dispatch(
+        handleOpen({ type: "success", message: "Successfully Authenticated." })
+      );
       history.push("/welcome-user");
+    } else {
+      dispatch(handleOpen({ type: "error", message: "Invalid Credentials." }));
+      setUsername("");
+      setPassword("");
     }
   };
 

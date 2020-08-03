@@ -25,6 +25,7 @@ export const useStyles = makeStyles((theme) => ({
   buttonStyle: {
     marginBottom: "3rem",
     backgroundColor: theme.palette.primary.main,
+    border: `1pt solid ${theme.palette.secondary.main}`,
     color: theme.palette.secondary.main,
     width: "30%",
     borderRadius: 12,
