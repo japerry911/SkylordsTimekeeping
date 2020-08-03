@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MyToolbar from "../MyToolbar/MyToolbar";
 import MyDrawer from "../MyDrawer/MyDrawer";
 import { withRouter } from "react-router-dom";
@@ -19,10 +19,14 @@ const MyAppBar = ({ location }) => {
     setDrawer(!drawer);
   };
 
+  useEffect(() => {
+    setTitle(ROUTES_OBJECT[location.pathname]);
+  }, [location.pathname]);
+
   return (
     <div className={classes.root}>
       <MyToolbar title={title} onMenuClick={toggleDrawer} />
-      <MyDrawer open={drawer} onClose={toggleDrawer} setTitle={setTitle} />
+      <MyDrawer open={drawer} onClose={toggleDrawer} />
     </div>
   );
 };

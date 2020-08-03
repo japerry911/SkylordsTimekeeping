@@ -1,4 +1,5 @@
 import goServer from "../../api/goServer";
+const _ = require("lodash");
 
 export const loadingStart = () => {
   return {
@@ -31,7 +32,7 @@ export const signIn = (username, password) => {
 
     return goServer.post("/api/users/authentication", formData).then(
       (response) => {
-        console.log(response);
+        dispatch(success(_.pick(response.data, "ID", "UserName", "Email")));
         return true;
       },
       (error) => {

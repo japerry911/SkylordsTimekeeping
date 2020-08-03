@@ -5,20 +5,32 @@ import { Link, withRouter } from "react-router-dom";
 import {
   NONAUTH_ROUTES_ARRAY,
   FOOTER_NONAUTH_POSTION_OBJECT,
+  AUTH_ROUTES_ARRAY,
+  FOOTER_AUTH_POSTION_OBJECT,
 } from "../../router/routeArrsObjs";
+import { useSelector } from "react-redux";
 import { useStyles } from "./FooterStyles";
 
 const Footer = ({ location }) => {
   const classes = useStyles();
+
+  const isAuthed = useSelector((state) => state.users.authed);
+
   const [value, setValue] = useState(
-    FOOTER_NONAUTH_POSTION_OBJECT[location.pathname] !== undefined
+    !isAuthed && FOOTER_NONAUTH_POSTION_OBJECT[location.pathname] !== undefined
       ? FOOTER_NONAUTH_POSTION_OBJECT[location.pathname]
+      : isAuthed && FOOTER_AUTH_POSTION_OBJECT[location.pathname]
+      ? FOOTER_AUTH_POSTION_OBJECT[location.pathname]
       : -1
   );
 
   useEffect(() => {
-    setValue(FOOTER_NONAUTH_POSTION_OBJECT[location.pathname]);
-  }, [location.pathname]);
+    if (!isAuthed) {
+      setValue(FOOTER_NONAUTH_POSTION_OBJECT[location.pathname]);
+    } else {
+      setValue(FOOTER_AUTH_POSTION_OBJECT[location.pathname]);
+    }
+  }, [location.pathname, isAuthed]);
 
   return (
     <BottomNavigation
@@ -29,21 +41,37 @@ const Footer = ({ location }) => {
       showLabels
       className={classes.footerStyle}
     >
-      {NONAUTH_ROUTES_ARRAY.map((routeObject, index) => {
-        return (
-          <BottomNavigationAction
-            key={index}
-            label={routeObject.title}
-            icon={<routeObject.icon />}
-            component={Link}
-            to={routeObject.path}
-            className={classes.tabStyle}
-            classes={{
-              selected: classes.tabSelectedStyle,
-            }}
-          />
-        );
-      })}
+      {!isAuthed
+        ? NONAUTH_ROUTES_ARRAY.map((routeObject, index) => {
+            return (
+              <BottomNavigationAction
+                key={index}
+                label={routeObject.title}
+                icon={<routeObject.icon />}
+                component={Link}
+                to={routeObject.path}
+                className={classes.tabStyle}
+                classes={{
+                  selected: classes.tabSelectedStyle,
+                }}
+              />
+            );
+          })
+        : AUTH_ROUTES_ARRAY.map((routeObject, index) => {
+            return (
+              <BottomNavigationAction
+                key={index}
+                label={routeObject.title}
+                icon={<routeObject.icon />}
+                component={Link}
+                to={routeObject.path}
+                className={classes.tabStyle}
+                classes={{
+                  selected: classes.tabSelectedStyle,
+                }}
+              />
+            );
+          })}
     </BottomNavigation>
   );
 };

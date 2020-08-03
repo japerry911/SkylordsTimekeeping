@@ -5,11 +5,17 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import { Link } from "react-router-dom";
-import { NONAUTH_ROUTES_ARRAY } from "../../router/routeArrsObjs";
+import {
+  NONAUTH_ROUTES_ARRAY,
+  AUTH_ROUTES_ARRAY,
+} from "../../router/routeArrsObjs";
+import { useSelector } from "react-redux";
 import { useStyles } from "./DrawerStyles";
 
-const MyDrawer = ({ open, onClose, setTitle }) => {
+const MyDrawer = ({ open, onClose }) => {
   const classes = useStyles();
+
+  const isAuthed = useSelector((state) => state.users.authed);
 
   return (
     <Drawer
@@ -22,27 +28,47 @@ const MyDrawer = ({ open, onClose, setTitle }) => {
       }}
     >
       <List>
-        {NONAUTH_ROUTES_ARRAY.map((routeObject, index) => {
-          return (
-            <ListItem
-              button
-              key={index}
-              onClick={() => {
-                setTitle(routeObject.title);
-                onClose();
-              }}
-              component={Link}
-              to={routeObject.path}
-            >
-              <ListItemText>{routeObject.title}</ListItemText>
-              {routeObject.icon ? (
-                <ListItemIcon>
-                  <routeObject.icon />
-                </ListItemIcon>
-              ) : null}
-            </ListItem>
-          );
-        })}
+        {!isAuthed
+          ? NONAUTH_ROUTES_ARRAY.map((routeObject, index) => {
+              return (
+                <ListItem
+                  button
+                  key={index}
+                  onClick={() => {
+                    onClose();
+                  }}
+                  component={Link}
+                  to={routeObject.path}
+                >
+                  <ListItemText>{routeObject.title}</ListItemText>
+                  {routeObject.icon ? (
+                    <ListItemIcon>
+                      <routeObject.icon />
+                    </ListItemIcon>
+                  ) : null}
+                </ListItem>
+              );
+            })
+          : AUTH_ROUTES_ARRAY.map((routeObject, index) => {
+              return (
+                <ListItem
+                  button
+                  key={index}
+                  onClick={() => {
+                    onClose();
+                  }}
+                  component={Link}
+                  to={routeObject.path}
+                >
+                  <ListItemText>{routeObject.title}</ListItemText>
+                  {routeObject.icon ? (
+                    <ListItemIcon>
+                      <routeObject.icon />
+                    </ListItemIcon>
+                  ) : null}
+                </ListItem>
+              );
+            })}
       </List>
     </Drawer>
   );
