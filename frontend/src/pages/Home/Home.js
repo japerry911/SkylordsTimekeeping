@@ -19,9 +19,13 @@ const Home = () => {
       >
         <Grid item xs={7} sm={7} md={7} lg={7} xl={7} align="center">
           <Paper className={classes.paperStyle}>
-            <Typography variant="h2" className={classes.mainTitleStyle}>
-              Skylord's Timekeeping
-            </Typography>
+            <figure>
+              <img
+                alt="Skylord's Timekeeper Logo"
+                src="https://skylord-timekeeping492193924349324.s3.us-east-2.amazonaws.com/Logos/logo_transparent_background.png"
+                className={classes.logoStyle}
+              />
+            </figure>
           </Paper>
           <div className={classes.buttonsDivStyle}>
             <Button
