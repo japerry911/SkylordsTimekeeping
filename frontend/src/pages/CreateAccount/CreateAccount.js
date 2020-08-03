@@ -9,10 +9,11 @@ import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { handleOpen, handleClose } from "../../redux/actions/snackbarActions";
+import { createUser } from "../../redux/actions/usersActions";
 import goServer from "../../api/goServer";
 import { useStyles } from "./CreateAccountStyles";
 
-const CreateAccount = () => {
+const CreateAccount = ({ history }) => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -22,13 +23,21 @@ const CreateAccount = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
   const [passwordValidation, setPasswordValidation] = useState(false);
-  const [emailValidation, setEmailValidation] = useState(false);
 
   useEffect(() => {
     if (username.length >= 7) {
       dispatch(handleClose());
     }
-  }, [username]);
+  }, [username, dispatch]);
+
+  useEffect(() => {
+    if (
+      // eslint-disable-next-line
+      /([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(email)
+    ) {
+      dispatch(handleClose());
+    }
+  }, [email, dispatch]);
 
   useEffect(() => {
     if (
@@ -50,17 +59,6 @@ const CreateAccount = () => {
       }
     }
   }, [password, confirmPassword, dispatch]);
-
-  useEffect(() => {
-    if (
-      email &&
-      /([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+).([a-zA-Z]{2,5})$/.test(email)
-    ) {
-      setEmailValidation(true);
-    } else {
-      setEmailValidation(false);
-    }
-  }, [email]);
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -89,6 +87,31 @@ const CreateAccount = () => {
         })
       );
       return;
+    }
+
+    if (
+      // eslint-disable-next-line
+      !/([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(email)
+    ) {
+      dispatch(
+        handleOpen({
+          type: "error",
+          message: "Email is in invalid format",
+        })
+      );
+    }
+
+    const result = await dispatch(createUser(username, email, password));
+    if (result) {
+      dispatch(
+        handleOpen({ type: "success", message: "Account Successfully Created" })
+      );
+      history.push("/sign-in");
+    } else {
+      handleOpen({
+        type: "error",
+        message: "Internal Error. Try again in a few seconds",
+      });
     }
   };
 
@@ -185,9 +208,7 @@ const CreateAccount = () => {
                     </Button>
                     <Button
                       className={classes.buttonStyle}
-                      disabled={
-                        !(username && emailValidation && passwordValidation)
-                      }
+                      disabled={!(username && email && passwordValidation)}
                       type="submit"
                     >
                       Create Account
