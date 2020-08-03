@@ -7,6 +7,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundImage: `url('https://skylord-timekeeping492193924349324.s3.us-east-2.amazonaws.com/Home/amanda-jones-CcIIao_-Eow-unsplash.jpg')`,
     backgroundRepeat: "no-repeat",
     backgroundAttachment: "fixed",
+    backgroundSize: "cover",
   },
   mainGridContainerStyle: {
     height: "100%",

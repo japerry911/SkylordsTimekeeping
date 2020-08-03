@@ -2,9 +2,10 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 export const useStyles = makeStyles((theme) => ({
   mainDivStyle: {
-    height: "100%",
+    minHeight: "100%",
     width: "100%",
     backgroundColor: theme.palette.secondary.main,
+    paddingBottom: "10rem",
   },
   logoImgStyle: {
     width: "40%",
@@ -13,8 +14,8 @@ export const useStyles = makeStyles((theme) => ({
   paperStyle: {
     paddingTop: "3rem",
     marginTop: "3rem",
-    height: "100%",
-    width: "75%",
+    height: "90%",
+    width: "50%",
     backgroundColor: theme.palette.primary.main,
     borderRadius: 12,
   },
@@ -46,8 +47,8 @@ export const useStyles = makeStyles((theme) => ({
     margin: "1.5rem 0",
   },
   subPaperStyle: {
-    width: "50%",
-    height: "50%",
+    width: "70%",
+    height: "75%",
     padding: "3rem 0",
     backgroundColor: theme.colors.lightGray,
     display: "flex",
@@ -65,5 +66,8 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "space-evenly",
     alignItems: "center",
     paddingTop: "2rem",
+  },
+  formStyle: {
+    width: "100%",
   },
 }));

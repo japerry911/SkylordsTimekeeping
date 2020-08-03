@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../../redux/actions/usersActions";
 import { handleOpen } from "../../redux/actions/snackbarActions";
 import Spinner from "../../components/Spinner/Spinner";
+import { Link } from "react-router-dom";
 import { useStyles } from "./SignInStyles";
 
 const SignIn = ({ history }) => {
@@ -73,51 +74,67 @@ const SignIn = ({ history }) => {
                     className={classes.logoImgStyle}
                   />
                 </figure>
-                <form className={classes.formStyle} onSubmit={handleSignIn}>
-                  <Paper className={classes.subPaperStyle}>
-                    <TextField
-                      label="Username"
-                      type="text"
-                      required
-                      onChange={(newUsername) =>
-                        setUsername(newUsername.target.value)
-                      }
-                      value={username}
-                      className={classes.textFieldStyle}
-                    />
-                    <TextField
-                      label="Password"
-                      type="password"
-                      required
-                      onChange={(newPassword) =>
-                        setPassword(newPassword.target.value)
-                      }
-                      value={password}
-                      className={classes.textFieldStyle}
-                    />
-                    <Grid
-                      container
-                      item
-                      xs={12}
-                      sm={12}
-                      md={12}
-                      lg={12}
-                      xl={12}
-                      className={classes.buttonGridStyle}
-                    >
-                      <Button
-                        className={classes.buttonStyle}
-                        type="submit"
-                        disabled={!validationStatus}
+                <Grid
+                  container
+                  item
+                  xs={12}
+                  sm={12}
+                  md={12}
+                  lg={12}
+                  xl={12}
+                  align="center"
+                  justify="center"
+                >
+                  <form className={classes.formStyle} onSubmit={handleSignIn}>
+                    <Paper className={classes.subPaperStyle}>
+                      <TextField
+                        label="Username"
+                        type="text"
+                        required
+                        onChange={(newUsername) =>
+                          setUsername(newUsername.target.value)
+                        }
+                        value={username}
+                        className={classes.textFieldStyle}
+                      />
+                      <TextField
+                        label="Password"
+                        type="password"
+                        required
+                        onChange={(newPassword) =>
+                          setPassword(newPassword.target.value)
+                        }
+                        value={password}
+                        className={classes.textFieldStyle}
+                      />
+                      <Grid
+                        container
+                        item
+                        xs={12}
+                        sm={12}
+                        md={12}
+                        lg={12}
+                        xl={12}
+                        className={classes.buttonGridStyle}
                       >
-                        Sign In
-                      </Button>
-                      <Button className={classes.buttonStyle}>
-                        Create Account
-                      </Button>
-                    </Grid>
-                  </Paper>
-                </form>
+                        <Button
+                          className={classes.buttonStyle}
+                          type="submit"
+                          disabled={!validationStatus}
+                        >
+                          Sign In
+                        </Button>
+                        <Button
+                          className={classes.buttonStyle}
+                          component={Link}
+                          to="/register-user"
+                        >
+                          Create Account
+                        </Button>
+                      </Grid>
+                    </Paper>
+                  </form>
+                </Grid>
               </Paper>
             </Grid>
           </Grid>

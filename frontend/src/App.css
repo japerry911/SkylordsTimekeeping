@@ -2,14 +2,12 @@ main {
   height: 100%;
 }
 
-.app,
 html,
 body,
-#root {
+#root,
+.app {
+  margin: 0;
+  padding: 0;
   height: 100%;
-}
-
-html {
-  overflow-x: hidden;
-  min-height: 90rem;
+  width: 100%;
 }
