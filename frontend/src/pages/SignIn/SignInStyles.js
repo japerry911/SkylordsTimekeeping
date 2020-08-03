@@ -12,7 +12,7 @@ export const useStyles = makeStyles((theme) => ({
     height: "auto",
   },
   paperStyle: {
-    paddingTop: "3rem",
+    padding: "2rem 0",
     marginTop: "3rem",
     height: "90%",
     width: "50%",

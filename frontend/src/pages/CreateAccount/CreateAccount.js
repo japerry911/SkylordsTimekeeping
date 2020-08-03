@@ -43,7 +43,7 @@ const CreateAccount = () => {
         );
       }
     }
-  }, [password, confirmPassword]);
+  }, [password, confirmPassword, dispatch]);
 
   useEffect(() => {
     if (
