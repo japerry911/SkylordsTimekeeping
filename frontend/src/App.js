@@ -5,6 +5,7 @@ import MyAppBar from "./components/MyAppBar/MyAppBar";
 import Footer from "./components/Footer/Footer";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./theme/theme";
+import ToastBar from "./components/ToastBar/ToastBar";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <main>
           <Routes />
         </main>
+        <ToastBar />
         <footer>
           <Footer />
         </footer>
