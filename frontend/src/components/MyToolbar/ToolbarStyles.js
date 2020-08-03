@@ -11,11 +11,18 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.only("md")]: {
       width: "50%",
     },
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.only("sm")]: {
+      width: "55%",
+    },
+    [theme.breakpoints.only("xs")]: {
       width: "80%",
     },
   },
   figureStyle: {
     width: "85%",
+    marginBlockStart: 0,
+    marginBlockEnd: 0,
+    marginInlineStart: 0,
+    marginInlineEnd: 0,
   },
 }));

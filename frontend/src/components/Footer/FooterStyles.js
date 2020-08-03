@@ -10,8 +10,24 @@ export const useStyles = makeStyles((theme) => ({
   tabStyle: {
     color: theme.colors.white,
     border: `2pt solid ${theme.palette.primary.main}`,
+    [theme.breakpoints.only("xs")]: {
+      minWidth: 30,
+    },
+  },
+  tabTextStyle: {
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "0.5rem",
+    },
+  },
+  tabWrapperStyle: {
+    textAlign: "center",
   },
   tabSelectedStyle: {
     backgroundColor: theme.palette.secondary.main,
+    [theme.breakpoints.only("xs")]: {
+      "& .MuiBottomNavigationAction-label.Mui-selected": {
+        fontSize: "0.7rem",
+      },
+    },
   },
 }));
