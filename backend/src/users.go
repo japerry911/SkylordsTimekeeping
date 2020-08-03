@@ -2,7 +2,6 @@ package main
 
 import (
 	"errors"
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -21,7 +20,6 @@ type User struct {
 func AllUsers() ([]User, error) {
 	rows, err := db.Query("SELECT * FROM users;")
 	if err != nil {
-		fmt.Println(err)
 		return nil, err
 	}
 
@@ -66,4 +64,27 @@ func CreateUser(r *http.Request) (User, error) {
 	}
 
 	return user, nil
+}
+
+// Authenticate POST /api/users/authentication
+func Authenticate(r *http.Request) (bool, error) {
+	row, err := db.Query("SELECT Password FROM users WHERE UserName = $1;", r.FormValue("UserName"))
+	if err != nil {
+		return false, err
+	}
+	lookUpUser := User{}
+	row.Next()
+	err = row.Scan(&lookUpUser.Password)
+	if err != nil {
+		return false, err
+	}
+
+	passwordAttempt := r.FormValue("Password")
+
+	err = bcrypt.CompareHashAndPassword([]byte(lookUpUser.Password), []byte(passwordAttempt))
+	if err != nil {
+		return false, err
+	}
+
+	return true, nil
 }
