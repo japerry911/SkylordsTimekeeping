@@ -42,3 +42,26 @@ export const signIn = (username, password) => {
     );
   };
 };
+
+export const createUser = (username, email, password) => {
+  return (dispatch) => {
+    dispatch(loadingStart());
+
+    const formData = new FormData();
+
+    formData.set("UserName", username);
+    formData.set("Email", email);
+    formData.set("Password", password);
+
+    return goServer.post("/api/users", formData).then(
+      (response) => {
+        dispatch(success(_.pick(response.data, "ID", "UserName", "Email")));
+        return true;
+      },
+      (error) => {
+        dispatch(failed(error));
+        return false;
+      }
+    );
+  };
+};

@@ -3,7 +3,6 @@ package main
 import (
 	"errors"
 	"net/http"
-	"strconv"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -44,21 +43,16 @@ func CreateUser(r *http.Request) (User, error) {
 	user := User{}
 	user.UserName = r.FormValue("UserName")
 	user.Email = r.FormValue("Email")
-	id, err := strconv.Atoi(r.FormValue("ID"))
-	if err != nil {
-		return user, errors.New("406. Not Acceptable. ID must be an integer")
-	}
-	user.ID = id
 	password := r.FormValue("Password")
 
-	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.MaxCost)
+	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
 		return user, errors.New("500. Internal Server Error, Try Again")
 	}
 
 	user.Password = string(hash)
 
-	_, err = db.Exec("INSERT INTO users (ID, UserName, Email, Password) VALUES ($1, $2, $3, $4);", user.ID, user.UserName, user.Email, user.Password)
+	_, err = db.Exec("INSERT INTO users (UserName, Email, Password) VALUES ($1, $2, $3);", user.UserName, user.Email, user.Password)
 	if err != nil {
 		return user, errors.New("500. Internal Server Error " + err.Error())
 	}

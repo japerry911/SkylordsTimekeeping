@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { handleOpen } from "../../redux/actions/snackbarActions";
+import { handleOpen, handleClose } from "../../redux/actions/snackbarActions";
 import { useStyles } from "./CreateAccountStyles";
 
 const CreateAccount = () => {
@@ -22,14 +22,19 @@ const CreateAccount = () => {
   const [email, setEmail] = useState("");
   const [passwordValidation, setPasswordValidation] = useState(false);
   const [emailValidation, setEmailValidation] = useState(false);
-  const [usernameValidation, setUsernameValidation] = useState(false);
-  const [validationStatus, setValidationStatus] = useState(false);
+
+  useEffect(() => {
+    if (username.length >= 7) {
+      dispatch(handleClose());
+    }
+  }, [username]);
 
   useEffect(() => {
     if (
       password === confirmPassword &&
-      /^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$/.test(password)
+      /^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{7,}$/.test(password)
     ) {
+      dispatch(handleClose());
       setPasswordValidation(true);
     } else {
       setPasswordValidation(false);
@@ -48,7 +53,7 @@ const CreateAccount = () => {
   useEffect(() => {
     if (
       email &&
-      /([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(email)
+      /([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+).([a-zA-Z]{2,5})$/.test(email)
     ) {
       setEmailValidation(true);
     } else {
@@ -56,23 +61,20 @@ const CreateAccount = () => {
     }
   }, [email]);
 
-  useEffect(() => {
-    if (/^[0-9a-zA-Z]{6,}$/.test(username)) {
-      setUsernameValidation(true);
-    } else {
-      setUsernameValidation(false);
+  const onSubmit = (event) => {
+    event.preventDefault();
+
+    // Validate that username isn't taken and check that it meets reqs
+    if (!/^[0-9a-zA-Z]{6,}$/.test(username)) {
+      dispatch(
+        handleOpen({
+          type: "error",
+          message:
+            "Username must be at least 7 characters (letters and numbers only)",
+        })
+      );
     }
-
-    // Check if Username is taken
-  }, [username]);
-
-  useEffect(() => {
-    setValidationStatus(
-      usernameValidation && passwordValidation && emailValidation
-    );
-  }, [username, passwordValidation, emailValidation]);
-
-  useEffect(() => {}, [username, email, password, confirmPassword]);
+  };
 
   return (
     <div className={classes.mainDivStyle}>
@@ -105,7 +107,7 @@ const CreateAccount = () => {
               align="center"
               justify="center"
             >
-              <form className={classes.formStyle}>
+              <form className={classes.formStyle} onSubmit={onSubmit}>
                 <Paper className={classes.subPaperStyle}>
                   <TextField
                     label="Username"
@@ -167,7 +169,10 @@ const CreateAccount = () => {
                     </Button>
                     <Button
                       className={classes.buttonStyle}
-                      disabled={!validationStatus}
+                      disabled={
+                        !(username && emailValidation && passwordValidation)
+                      }
+                      type="submit"
                     >
                       Create Account
                     </Button>
