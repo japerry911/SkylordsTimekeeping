@@ -14,7 +14,7 @@ export const NONAUTH_ROUTES_ARRAY = [
 ];
 
 export const AUTH_ROUTES_ARRAY = [
-  { path: "/welcome-user", title: "Welcome", icon: WelcomeIcon },
+  { path: "/welcome", title: "Welcome", icon: WelcomeIcon },
 ];
 
 export const ROUTES_OBJECT = {
@@ -23,7 +23,7 @@ export const ROUTES_OBJECT = {
   "/contact": "Contact",
   "/sign-in": "Sign In",
   "/register-user": "Create Account",
-  "/welcome-user": "Welcome",
+  "/welcome": "Welcome",
 };
 
 export const FOOTER_NONAUTH_POSTION_OBJECT = {
@@ -35,5 +35,5 @@ export const FOOTER_NONAUTH_POSTION_OBJECT = {
 };
 
 export const FOOTER_AUTH_POSTION_OBJECT = {
-  "/welcome-user": 0,
+  "/welcome": 0,
 };

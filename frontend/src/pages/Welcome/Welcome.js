@@ -1,8 +1,8 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
-import { useStyles } from "./WelcomeUserStyles";
+import { useStyles } from "./WelcomeStyles";
 
-const WelcomeUser = () => {
+const Welcome = () => {
   const classes = useStyles();
 
   return (
@@ -12,4 +12,4 @@ const WelcomeUser = () => {
   );
 };
 
-export default WelcomeUser;
+export default Welcome;

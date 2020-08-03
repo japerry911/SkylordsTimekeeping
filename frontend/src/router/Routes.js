@@ -6,6 +6,8 @@ import Contact from "../pages/Contact/Contact";
 import SignIn from "../pages/SignIn/SignIn";
 import ScrollToTop from "./ScrollToTop";
 import CreateAccount from "../pages/CreateAccount/CreateAccount";
+import ProtectedRoute from "./ProtectedRoute";
+import Welcome from "../pages/Welcome/Welcome";
 
 export default () => (
   <Fragment>
@@ -20,5 +22,7 @@ export default () => (
     <Route exact path="/sign-in" component={SignIn} />
 
     <Route exact path="/register-user" component={CreateAccount} />
+
+    <ProtectedRoute exact path="/welcome" component={Welcome} />
   </Fragment>
 );
