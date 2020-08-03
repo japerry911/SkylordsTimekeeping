@@ -53,6 +53,8 @@ const Footer = ({ location }) => {
                 className={classes.tabStyle}
                 classes={{
                   selected: classes.tabSelectedStyle,
+                  label: classes.tabTextStyle,
+                  wrapper: classes.tabWrapperStyle,
                 }}
               />
             );

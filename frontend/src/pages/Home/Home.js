@@ -17,7 +17,7 @@ const Home = () => {
         alignItems="center"
         justify="flex-end"
       >
-        <Grid item xs={7} sm={7} md={7} lg={7} xl={7} align="center">
+        <Grid item xs={12} sm={12} md={12} lg={7} xl={7} align="center">
           <Paper className={classes.paperStyle}>
             <figure>
               <img
