@@ -26,7 +26,7 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: "3rem",
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.secondary.main,
-    width: "20%",
+    width: "30%",
     borderRadius: 12,
     padding: "1rem",
     "&:hover": {
@@ -45,7 +45,7 @@ export const useStyles = makeStyles((theme) => ({
     margin: "1.5rem 0",
   },
   subPaperStyle: {
-    width: "80%",
+    width: "50%",
     height: "50%",
     padding: "3rem 0",
     backgroundColor: theme.colors.lightGray,
@@ -63,5 +63,6 @@ export const useStyles = makeStyles((theme) => ({
     width: "100%",
     justifyContent: "space-evenly",
     alignItems: "center",
+    paddingTop: "2rem",
   },
 }));

@@ -68,7 +68,7 @@ const SignIn = () => {
                 >
                   <Button className={classes.buttonStyle}>Sign In</Button>
                   <Button className={classes.buttonStyle}>
-                    Create an Account
+                    Create Account
                   </Button>
                 </Grid>
               </Paper>
