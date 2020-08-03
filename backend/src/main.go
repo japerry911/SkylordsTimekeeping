@@ -1,7 +1,8 @@
 package main
 
 import (
-	"models"
+	"encoding/json"
+	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -10,6 +11,9 @@ import (
 func main() {
 	r := mux.NewRouter()
 
+	r.HandleFunc("/api/users", getUsers)
+
+	log.Fatal(http.ListenAndServe(":8080", r))
 }
 
 func getUsers(w http.ResponseWriter, r *http.Request) {
@@ -18,5 +22,17 @@ func getUsers(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	users, err := models.AllUsers()
+	users, err := AllUsers()
+	if err != nil {
+		http.Error(w, http.StatusText(500), http.StatusInternalServerError)
+		return
+	}
+
+	usersJSON, err := json.Marshal(users)
+	if err != nil {
+		http.Error(w, http.StatusText(500), http.StatusInternalServerError)
+		return
+	}
+
+	w.Write(usersJSON)
 }
