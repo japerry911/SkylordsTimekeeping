@@ -19,16 +19,26 @@ export const useStyles = makeStyles((theme) => ({
   },
   paperStyle: {
     backgroundColor: theme.palette.primary.main,
-    width: "50%",
+    width: "80%",
     borderRadius: 12,
     padding: "2rem",
     border: `3pt solid ${theme.palette.secondary.main}`,
+    [theme.breakpoints.down("sm")]: {
+      width: "90%",
+      padding: 0,
+    },
   },
   buttonsDivStyle: {
     paddingTop: "3rem",
     display: "flex",
     width: "50%",
     justifyContent: "space-between",
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: "1rem",
+      width: "90%",
+      flexDirection: "column",
+      alignItems: "center",
+    },
   },
   buttonStyle: {
     backgroundColor: theme.palette.primary.main,
@@ -42,6 +52,12 @@ export const useStyles = makeStyles((theme) => ({
       border: `3pt solid ${theme.palette.primary.main}`,
       color: theme.palette.primary.main,
       transition: "220ms ease-in-out",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "60%",
+      height: "5rem",
+      padding: "0.5rem",
+      margin: "1rem 0",
     },
   },
   logoStyle: {
