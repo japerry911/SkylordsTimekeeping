@@ -1,6 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+	"net/http"
+	"strconv"
+
+	"golang.org/x/crypto/bcrypt"
+)
 
 // User Type
 type User struct {
@@ -32,4 +39,31 @@ func AllUsers() ([]User, error) {
 	}
 
 	return users, nil
+}
+
+// CreateUser POST /api/users
+func CreateUser(r *http.Request) (User, error) {
+	user := User{}
+	user.UserName = r.FormValue("UserName")
+	user.Email = r.FormValue("Email")
+	id, err := strconv.Atoi(r.FormValue("ID"))
+	if err != nil {
+		return user, errors.New("406. Not Acceptable. ID must be an integer")
+	}
+	user.ID = id
+	password := r.FormValue("Password")
+
+	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		return user, errors.New("500. Internal Server Error, Try Again")
+	}
+
+	user.Password = string(hash)
+
+	_, err = db.Exec("INSERT INTO users (ID, UserName, Email, Password) VALUES ($1, $2, $3, $4);", user.ID, user.UserName, user.Email, user.Password)
+	if err != nil {
+		return user, errors.New("500. Internal Server Error " + err.Error())
+	}
+
+	return user, nil
 }
