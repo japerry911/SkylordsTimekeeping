@@ -14,7 +14,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   headerTextStyle: {
     color: theme.palette.secondary.main,
-    marginLeft: "10%",
+    marginLeft: "8%",
     marginTop: "2em",
+    fontWeight: "bold",
   },
 }));
