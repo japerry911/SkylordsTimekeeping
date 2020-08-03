@@ -11,16 +11,7 @@ let theme = createMuiTheme({
   },
   colors: {
     white: "#fff",
-  },
-  fonts: {
-    avenirItalicize: "Avenir-Italicize",
-    avenirBold: "Avenir-Bold",
-    avenirMedium: "Avenir-Medium",
-    avenir: "Avenir",
-  },
-  articlePaperStyle: {
-    width: "50%",
-    backgroundColor: "black",
+    lightGray: "#b9bbc0",
   },
 });
 

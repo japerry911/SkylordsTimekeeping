@@ -66,7 +66,7 @@ const SignIn = () => {
                   xl={12}
                   className={classes.buttonGridStyle}
                 >
-                  <Button className={classes.buttonsStyle}>Sign In</Button>
+                  <Button className={classes.buttonStyle}>Sign In</Button>
                   <Button className={classes.buttonStyle}>
                     Create an Account
                   </Button>

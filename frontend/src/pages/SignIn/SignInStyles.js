@@ -2,7 +2,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 export const useStyles = makeStyles((theme) => ({
   mainDivStyle: {
-    minHeight: "80rem",
+    height: "100%",
     width: "100%",
     backgroundColor: theme.palette.secondary.main,
   },
@@ -16,6 +16,7 @@ export const useStyles = makeStyles((theme) => ({
     height: "100%",
     width: "75%",
     backgroundColor: theme.palette.primary.main,
+    borderRadius: 12,
   },
   titleStyle: {
     fontWeight: "bold",
@@ -23,15 +24,15 @@ export const useStyles = makeStyles((theme) => ({
   },
   buttonStyle: {
     marginBottom: "3rem",
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.primary.main,
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.secondary.main,
     width: "20%",
     borderRadius: 12,
     padding: "1rem",
     "&:hover": {
-      backgroundColor: theme.palette.primary.main,
-      border: `1pt solid ${theme.palette.secondary.main}`,
-      color: theme.palette.secondary.main,
+      backgroundColor: theme.palette.secondary.main,
+      border: `1pt solid ${theme.palette.primary.main}`,
+      color: theme.palette.primary.main,
       transition: "220ms ease-in-out",
     },
   },
@@ -44,16 +45,15 @@ export const useStyles = makeStyles((theme) => ({
     margin: "1.5rem 0",
   },
   subPaperStyle: {
-    width: "50%",
+    width: "80%",
     height: "50%",
     padding: "3rem 0",
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.colors.lightGray,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-  },
-  formStyle: {
-    height: "100%",
+    justifyContent: "space-between",
+    borderRadius: 12,
   },
   mainContainerStyle: {
     minHeight: "40rem",
@@ -61,7 +61,7 @@ export const useStyles = makeStyles((theme) => ({
   buttonGridStyle: {
     display: "flex",
     width: "100%",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     alignItems: "center",
   },
 }));
