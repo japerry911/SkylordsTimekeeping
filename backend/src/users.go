@@ -67,25 +67,27 @@ func CreateUser(r *http.Request) (User, error) {
 }
 
 // Authenticate POST /api/users/authentication
-func Authenticate(r *http.Request) (bool, error) {
-	row, err := db.Query("SELECT Password FROM users WHERE UserName = $1;", r.FormValue("UserName"))
+func Authenticate(r *http.Request) (bool, User, error) {
+	row, err := db.Query("SELECT * FROM users WHERE UserName = $1;", r.FormValue("UserName"))
 	if err != nil {
-		return false, err
+		return false, User{}, err
 	}
 
 	lookUpUser := User{}
 	row.Next()
-	err = row.Scan(&lookUpUser.Password)
+	err = row.Scan(&lookUpUser.ID, &lookUpUser.UserName, &lookUpUser.Email, &lookUpUser.Password)
 	if err != nil {
-		return false, err
+		return false, User{}, err
 	}
 
 	passwordAttempt := r.FormValue("Password")
 
 	err = bcrypt.CompareHashAndPassword([]byte(lookUpUser.Password), []byte(passwordAttempt))
 	if err != nil {
-		return false, err
+		return false, User{}, err
 	}
 
-	return true, nil
+	lookUpUser.Password = ""
+
+	return true, lookUpUser, nil
 }

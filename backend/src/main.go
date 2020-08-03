@@ -77,11 +77,16 @@ func authenticateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	authenticationStatus, err := Authenticate(r)
+	authenticationStatus, user, _ := Authenticate(r)
 
 	if authenticationStatus {
-		w.Write([]byte("SUCCESSFULLY AUTHENTICATED"))
+		userJSON, err := json.Marshal(user)
+		if err != nil {
+			http.Error(w, http.StatusText(401), http.StatusUnauthorized)
+			return
+		}
+		w.Write(userJSON)
 	} else {
-		w.Write([]byte("FAILED TO AUTHENTICATE - " + err.Error()))
+		http.Error(w, http.StatusText(401), http.StatusUnauthorized)
 	}
 }
