@@ -43,4 +43,7 @@ export const useStyles = makeStyles((theme) => ({
       transition: "220ms ease-in-out",
     },
   },
+  logoStyle: {
+    width: "100%",
+  },
 }));

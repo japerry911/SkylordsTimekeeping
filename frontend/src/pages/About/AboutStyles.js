@@ -16,6 +16,7 @@ export const useStyles = makeStyles((theme) => ({
     height: "85%",
     width: "75%",
     backgroundColor: theme.palette.primary.main,
+    borderRadius: 12,
   },
   titleStyle: {
     fontWeight: "bold",
