@@ -38,6 +38,18 @@ func AllUsers() ([]User, error) {
 	return users, nil
 }
 
+// IfExistsByUsername GET /api/users/if-exists-by-username/:username
+func IfExistsByUsername(username string) (bool, error) {
+	result, err := db.Query("SELECT UserName FROM users WHERE username = $1", username)
+	if err != nil {
+		return false, err
+	}
+
+	defer result.Close()
+
+	return result.Next(), nil
+}
+
 // CreateUser POST /api/users
 func CreateUser(r *http.Request) (User, error) {
 	user := User{}
@@ -66,6 +78,8 @@ func Authenticate(r *http.Request) (bool, User, error) {
 	if err != nil {
 		return false, User{}, err
 	}
+
+	defer row.Close()
 
 	lookUpUser := User{}
 	row.Next()

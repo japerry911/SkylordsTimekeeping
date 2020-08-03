@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { handleOpen, handleClose } from "../../redux/actions/snackbarActions";
+import goServer from "../../api/goServer";
 import { useStyles } from "./CreateAccountStyles";
 
 const CreateAccount = () => {
@@ -61,10 +62,10 @@ const CreateAccount = () => {
     }
   }, [email]);
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
 
-    // Validate that username isn't taken and check that it meets reqs
+    // Validate that username meets length requirement
     if (!/^[0-9a-zA-Z]{6,}$/.test(username)) {
       dispatch(
         handleOpen({
@@ -73,6 +74,21 @@ const CreateAccount = () => {
             "Username must be at least 7 characters (letters and numbers only)",
         })
       );
+      return;
+    }
+
+    // Validate that username exists
+    const response = await goServer.get(
+      `/api/users/if-exists-by-username/${username}`
+    );
+    if (response.status === 202) {
+      dispatch(
+        handleOpen({
+          type: "error",
+          message: "Username already exists, please try a different username",
+        })
+      );
+      return;
     }
   };
 
