@@ -51,7 +51,7 @@ func CreateUser(r *http.Request) (User, error) {
 	user.ID = id
 	password := r.FormValue("Password")
 
-	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.MaxCost)
 	if err != nil {
 		return user, errors.New("500. Internal Server Error, Try Again")
 	}
@@ -72,6 +72,7 @@ func Authenticate(r *http.Request) (bool, error) {
 	if err != nil {
 		return false, err
 	}
+
 	lookUpUser := User{}
 	row.Next()
 	err = row.Scan(&lookUpUser.Password)

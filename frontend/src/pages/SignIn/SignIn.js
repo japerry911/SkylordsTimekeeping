@@ -6,6 +6,8 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { useDispatch } from "react-redux";
+import { signIn } from "../../redux/actions/usersActions";
 import { useStyles } from "./SignInStyles";
 
 const SignIn = () => {
@@ -13,6 +15,14 @@ const SignIn = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+
+  const handleSignIn = (event) => {
+    event.preventDefault();
+
+    dispatch(signIn(username, password));
+  };
 
   return (
     <div className={classes.mainDivStyle}>
@@ -34,7 +44,7 @@ const SignIn = () => {
                 className={classes.logoImgStyle}
               />
             </figure>
-            <form className={classes.formStyle}>
+            <form className={classes.formStyle} onSubmit={handleSignIn}>
               <Paper className={classes.subPaperStyle}>
                 <TextField
                   label="Username"
@@ -66,7 +76,9 @@ const SignIn = () => {
                   xl={12}
                   className={classes.buttonGridStyle}
                 >
-                  <Button className={classes.buttonStyle}>Sign In</Button>
+                  <Button className={classes.buttonStyle} type="submit">
+                    Sign In
+                  </Button>
                   <Button className={classes.buttonStyle}>
                     Create Account
                   </Button>

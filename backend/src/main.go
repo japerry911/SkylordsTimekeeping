@@ -6,16 +6,24 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 )
 
 func main() {
+	c := cors.New(cors.Options{
+		AllowedOrigins: []string{"http://localhost:3000"},
+		AllowedMethods: []string{"GET", "POST"},
+	})
+
 	r := mux.NewRouter()
 
 	r.HandleFunc("/api/users", getUsers).Methods("GET")
 	r.HandleFunc("/api/users", createUser).Methods("POST")
 	r.HandleFunc("/api/users/authentication", authenticateUser).Methods("POST")
 
-	log.Fatal(http.ListenAndServe(":8080", r))
+	r.Use(mux.CORSMethodMiddleware(r))
+
+	log.Fatal(http.ListenAndServe(":8080", c.Handler(r)))
 }
 
 // getUsers : GET /api/users
