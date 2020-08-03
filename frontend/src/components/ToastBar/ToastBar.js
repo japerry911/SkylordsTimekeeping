@@ -12,8 +12,8 @@ const ToastBar = () => {
   const dispatch = useDispatch();
   const { open, type, message } = useSelector((state) => state.snackbar);
 
-  const handleClick = (event, reason) => {
-    dispatch(handleClose(event, reason));
+  const handleClick = (_, reason) => {
+    dispatch(handleClose(reason));
   };
 
   return (

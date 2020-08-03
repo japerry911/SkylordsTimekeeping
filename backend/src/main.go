@@ -20,6 +20,7 @@ func main() {
 	r.HandleFunc("/api/users", getUsers).Methods("GET")
 	r.HandleFunc("/api/users", createUser).Methods("POST")
 	r.HandleFunc("/api/users/authentication", authenticateUser).Methods("POST")
+	r.HandleFunc("/api/users/if-exists-by-username/{username}", ifExistsByUsername).Methods("GET")
 
 	r.Use(mux.CORSMethodMiddleware(r))
 
@@ -46,6 +47,23 @@ func getUsers(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Write(usersJSON)
+}
+
+// lookUpUserByUsername : GET /api/users/if-exists-by-username/:username
+func ifExistsByUsername(w http.ResponseWriter, r *http.Request) {
+	username := mux.Vars(r)["username"]
+
+	exists, err := IfExistsByUsername(username)
+	if err != nil {
+		http.Error(w, http.StatusText(500), http.StatusInternalServerError)
+		return
+	}
+
+	if exists {
+		http.Error(w, http.StatusText(202), http.StatusAccepted)
+	} else {
+		http.Error(w, http.StatusText(200), http.StatusOK)
+	}
 }
 
 // createUser : POST /api/users

@@ -8,10 +8,12 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { handleOpen } from "../../redux/actions/snackbarActions";
+import { handleOpen, handleClose } from "../../redux/actions/snackbarActions";
+import { createUser } from "../../redux/actions/usersActions";
+import goServer from "../../api/goServer";
 import { useStyles } from "./CreateAccountStyles";
 
-const CreateAccount = () => {
+const CreateAccount = ({ history }) => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -21,15 +23,28 @@ const CreateAccount = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
   const [passwordValidation, setPasswordValidation] = useState(false);
-  const [emailValidation, setEmailValidation] = useState(false);
-  const [usernameValidation, setUsernameValidation] = useState(false);
-  const [validationStatus, setValidationStatus] = useState(false);
+
+  useEffect(() => {
+    if (username.length >= 7) {
+      dispatch(handleClose());
+    }
+  }, [username, dispatch]);
+
+  useEffect(() => {
+    if (
+      // eslint-disable-next-line
+      /([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(email)
+    ) {
+      dispatch(handleClose());
+    }
+  }, [email, dispatch]);
 
   useEffect(() => {
     if (
       password === confirmPassword &&
-      /^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$/.test(password)
+      /^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{7,}$/.test(password)
     ) {
+      dispatch(handleClose());
       setPasswordValidation(true);
     } else {
       setPasswordValidation(false);
@@ -43,36 +58,62 @@ const CreateAccount = () => {
         );
       }
     }
-  }, [password, confirmPassword]);
+  }, [password, confirmPassword, dispatch]);
 
-  useEffect(() => {
-    if (
-      email &&
-      /([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(email)
-    ) {
-      setEmailValidation(true);
-    } else {
-      setEmailValidation(false);
-    }
-  }, [email]);
+  const onSubmit = async (event) => {
+    event.preventDefault();
 
-  useEffect(() => {
-    if (/^[0-9a-zA-Z]{6,}$/.test(username)) {
-      setUsernameValidation(true);
-    } else {
-      setUsernameValidation(false);
+    // Validate that username meets length requirement
+    if (!/^[0-9a-zA-Z]{6,}$/.test(username)) {
+      dispatch(
+        handleOpen({
+          type: "error",
+          message:
+            "Username must be at least 7 characters (letters and numbers only)",
+        })
+      );
+      return;
     }
 
-    // Check if Username is taken
-  }, [username]);
-
-  useEffect(() => {
-    setValidationStatus(
-      usernameValidation && passwordValidation && emailValidation
+    // Validate that username exists
+    const response = await goServer.get(
+      `/api/users/if-exists-by-username/${username}`
     );
-  }, [username, passwordValidation, emailValidation]);
+    if (response.status === 202) {
+      dispatch(
+        handleOpen({
+          type: "error",
+          message: "Username already exists, please try a different username",
+        })
+      );
+      return;
+    }
 
-  useEffect(() => {}, [username, email, password, confirmPassword]);
+    if (
+      // eslint-disable-next-line
+      !/([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(email)
+    ) {
+      dispatch(
+        handleOpen({
+          type: "error",
+          message: "Email is in invalid format",
+        })
+      );
+    }
+
+    const result = await dispatch(createUser(username, email, password));
+    if (result) {
+      dispatch(
+        handleOpen({ type: "success", message: "Account Successfully Created" })
+      );
+      history.push("/sign-in");
+    } else {
+      handleOpen({
+        type: "error",
+        message: "Internal Error. Try again in a few seconds",
+      });
+    }
+  };
 
   return (
     <div className={classes.mainDivStyle}>
@@ -105,7 +146,7 @@ const CreateAccount = () => {
               align="center"
               justify="center"
             >
-              <form className={classes.formStyle}>
+              <form className={classes.formStyle} onSubmit={onSubmit}>
                 <Paper className={classes.subPaperStyle}>
                   <TextField
                     label="Username"
@@ -167,7 +208,8 @@ const CreateAccount = () => {
                     </Button>
                     <Button
                       className={classes.buttonStyle}
-                      disabled={!validationStatus}
+                      disabled={!(username && email && passwordValidation)}
+                      type="submit"
                     >
                       Create Account
                     </Button>
