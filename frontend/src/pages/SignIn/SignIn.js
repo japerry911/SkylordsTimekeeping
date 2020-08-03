@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import HeroHeader from "../../components/HeroHeader/HeroHeader";
@@ -17,6 +17,7 @@ const SignIn = ({ history }) => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [validationStatus, setValidationStatus] = useState(false);
 
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.users.loading);
@@ -37,6 +38,10 @@ const SignIn = ({ history }) => {
       setPassword("");
     }
   };
+
+  useEffect(() => {
+    setValidationStatus(username && password);
+  }, [username, password]);
 
   return (
     <div className={classes.mainDivStyle}>
@@ -100,7 +105,11 @@ const SignIn = ({ history }) => {
                       xl={12}
                       className={classes.buttonGridStyle}
                     >
-                      <Button className={classes.buttonStyle} type="submit">
+                      <Button
+                        className={classes.buttonStyle}
+                        type="submit"
+                        disabled={!validationStatus}
+                      >
                         Sign In
                       </Button>
                       <Button className={classes.buttonStyle}>
