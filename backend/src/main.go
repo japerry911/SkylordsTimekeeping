@@ -21,6 +21,7 @@ func main() {
 	r.HandleFunc("/api/users", createUser).Methods("POST")
 	r.HandleFunc("/api/users/authentication", authenticateUser).Methods("POST")
 	r.HandleFunc("/api/users/if-exists-by-username/{username}", ifExistsByUsername).Methods("GET")
+	r.HandleFunc("/api/contact/send-message", sendMessage).Methods("POST")
 
 	r.Use(mux.CORSMethodMiddleware(r))
 
@@ -60,9 +61,9 @@ func ifExistsByUsername(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if exists {
-		http.Error(w, http.StatusText(202), http.StatusAccepted)
+		w.WriteHeader(http.StatusAccepted)
 	} else {
-		http.Error(w, http.StatusText(200), http.StatusOK)
+		w.WriteHeader(http.StatusOK)
 	}
 }
 
@@ -107,4 +108,19 @@ func authenticateUser(w http.ResponseWriter, r *http.Request) {
 	} else {
 		http.Error(w, http.StatusText(401), http.StatusUnauthorized)
 	}
+}
+
+// sendMessage : POST /api/contact/send-email
+func sendMessage(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
+		return
+	}
+
+	err := Send(r)
+	if err != nil {
+		http.Error(w, http.StatusText(500), http.StatusInternalServerError)
+		return
+	}
+
 }
