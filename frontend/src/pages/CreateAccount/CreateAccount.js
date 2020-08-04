@@ -118,8 +118,8 @@ const CreateAccount = ({ history }) => {
   return (
     <div className={classes.mainDivStyle}>
       <HeroHeader
-        headerText="SIGN IN"
-        imgUrl="https://skylord-timekeeping492193924349324.s3.us-east-2.amazonaws.com/SignIn/anoir-chafik-2_3c4dIFYFU-unsplash.jpg"
+        headerText="CREATE ACCOUNT"
+        imgUrl="https://skylord-timekeeping492193924349324.s3.us-east-2.amazonaws.com/CreateAccount/joe-caione-qO-PIF84Vxg-unsplash+(1).jpg"
       />
       <Grid container justify="center" className={classes.mainContainerStyle}>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12} align="center">

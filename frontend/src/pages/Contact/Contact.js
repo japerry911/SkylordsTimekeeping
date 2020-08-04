@@ -76,8 +76,8 @@ const Contact = () => {
       <LoadingOverlay active={isLoading} spinner text="Sending Message">
         <div className={classes.mainDivStyle}>
           <HeroHeader
-            headerText="SIGN IN"
-            imgUrl="https://skylord-timekeeping492193924349324.s3.us-east-2.amazonaws.com/SignIn/anoir-chafik-2_3c4dIFYFU-unsplash.jpg"
+            headerText="CONTACT"
+            imgUrl="https://skylord-timekeeping492193924349324.s3.us-east-2.amazonaws.com/Contact/emerson-peters-oBCT3obZ6OY-unsplash+(1).jpg"
           />
           <Grid
             container

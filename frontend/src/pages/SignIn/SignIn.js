@@ -32,7 +32,7 @@ const SignIn = ({ history }) => {
       dispatch(
         handleOpen({ type: "success", message: "Successfully Authenticated." })
       );
-      history.push("/welcome-user");
+      history.push("/welcome");
     } else {
       dispatch(handleOpen({ type: "error", message: "Invalid Credentials." }));
       setUsername("");

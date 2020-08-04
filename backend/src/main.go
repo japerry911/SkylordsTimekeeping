@@ -6,8 +6,15 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
 	"github.com/rs/cors"
 )
+
+func init() {
+	if err := godotenv.Load(); err != nil {
+		log.Fatalln("No .env File Found")
+	}
+}
 
 func main() {
 	c := cors.New(cors.Options{
