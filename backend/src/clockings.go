@@ -95,7 +95,7 @@ func ClockOut(ID string, clockOutTime string) (Clocking, error) {
 func ProcessUpload(r *http.Request) error {
 	r.ParseMultipartForm(10 << 20)
 
-	file, handler, err := r.FormValue("ClockingsFile")
+	file, _, err := r.FormFile("ClockingsFile")
 	if err != nil {
 		return err
 	}
