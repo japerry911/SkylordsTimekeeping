@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
     minHeight: "80rem",
     width: "100%",
     backgroundColor: theme.palette.secondary.main,
-    [theme.breakpoints.only("sm")]: {
+    [theme.breakpoints.down("md")]: {
       minHeight: "85rem",
     },
     [theme.breakpoints.only("xs")]: {
@@ -27,7 +27,11 @@ export const useStyles = makeStyles((theme) => ({
     width: "55%",
     backgroundColor: theme.palette.primary.main,
     borderRadius: 12,
-    [theme.breakpoints.down("sm")]: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-between",
+    [theme.breakpoints.down("md")]: {
       width: "90%",
       paddingBottom: "1rem",
     },
