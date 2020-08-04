@@ -8,6 +8,7 @@ import ScrollToTop from "./ScrollToTop";
 import CreateAccount from "../pages/CreateAccount/CreateAccount";
 import ProtectedRoute from "./ProtectedRoute";
 import Welcome from "../pages/Welcome/Welcome";
+import NotFound from "../pages/NotFound/NotFound";
 
 export default () => (
   <Fragment>
@@ -24,5 +25,7 @@ export default () => (
     <Route exact path="/register-user" component={CreateAccount} />
 
     <ProtectedRoute exact path="/welcome" component={Welcome} />
+
+    <Route path="*" component={NotFound} />
   </Fragment>
 );
