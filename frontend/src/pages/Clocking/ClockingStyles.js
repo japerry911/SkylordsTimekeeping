@@ -9,6 +9,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundRepeat: "no-repeat",
     backgroundAttachment: "fixed",
     backgroundSize: "cover",
+    paddingBottom: "3rem",
   },
   loadingOverlayStyle: {
     "& _loading_overlay_wrapper": {
@@ -31,6 +32,15 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
+    [theme.breakpoints.only("md")]: {
+      width: "60%",
+    },
+    [theme.breakpoints.only("sm")]: {
+      width: "70%",
+    },
+    [theme.breakpoints.only("xs")]: {
+      width: "72%",
+    },
   },
   subPaperStyle: {
     width: "90%",
@@ -41,6 +51,10 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "space-between",
     borderRadius: 12,
+    [theme.breakpoints.only("xs")]: {
+      width: "100%",
+      padding: "1rem 0",
+    },
   },
   subPaperCenteredStyle: {
     width: "90%",
@@ -51,9 +65,16 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 12,
+    [theme.breakpoints.only("xs")]: {
+      width: "100%",
+      padding: "1rem 0",
+    },
   },
   textStyle: {
-    padding: "0 3rem",
+    padding: "0 1rem",
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "0.6rem",
+    },
   },
   titleStyle: {
     fontWeight: "bold",
@@ -85,10 +106,10 @@ export const useStyles = makeStyles((theme) => ({
       transition: "220ms ease-in-out",
     },
     [theme.breakpoints.only("sm")]: {
-      width: "40%",
+      width: "90%",
     },
     [theme.breakpoints.only("xs")]: {
-      width: "42%",
+      width: "90%",
       fontSize: ".6rem",
     },
   },

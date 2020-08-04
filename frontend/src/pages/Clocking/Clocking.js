@@ -23,7 +23,6 @@ const Clocking = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    userID = 1;
     const result = goServer.get(`/api/clockings/find-by-userID/${userID}`).then(
       (response) => {
         if (response.status === 202) {
@@ -87,7 +86,7 @@ const Clocking = () => {
     const clockInTime = new Date().toISOString();
     const formData = new FormData();
 
-    formData.set("UserID", 1);
+    formData.set("UserID", userID);
     formData.set("ClockIn", clockInTime);
 
     goServer.post("/api/clockings", formData).then(
@@ -146,27 +145,25 @@ const Clocking = () => {
               </Typography>
               <Divider className={classes.dividerStyle} />
             </Grid>
-            {clockInTime ? (
-              <Grid
-                item
-                xs={12}
-                sm={12}
-                md={12}
-                lg={12}
-                xl={12}
-                className={classes.gridItemStyle}
-                align="center"
-              >
-                <Paper className={classes.subPaperStyle}>
-                  <Typography variant="body1" className={classes.textStyle}>
-                    Last Clock In Time:
-                  </Typography>
-                  <Typography variant="body1" className={classes.textStyle}>
-                    <strong>{clockInTime}</strong>
-                  </Typography>
-                </Paper>
-              </Grid>
-            ) : null}
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={12}
+              lg={12}
+              xl={12}
+              className={classes.gridItemStyle}
+              align="center"
+            >
+              <Paper className={classes.subPaperStyle}>
+                <Typography variant="h6" className={classes.textStyle}>
+                  Last Clock In Time:
+                </Typography>
+                <Typography variant="body1" className={classes.textStyle}>
+                  <strong>{clockInTime}</strong>
+                </Typography>
+              </Paper>
+            </Grid>
             <Grid
               item
               xs={12}
