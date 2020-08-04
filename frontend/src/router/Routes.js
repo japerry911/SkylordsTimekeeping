@@ -29,7 +29,7 @@ export default () => (
 
       <ProtectedRoute exact path="/welcome/:userId" component={Welcome} />
 
-      <ProtectedRoute exact path="/clocking/:userId" component={Clocking} />
+      <Route exact path="/clocking/:userId" component={Clocking} />
 
       <ProtectedRoute exact path="/history/:userId" component={History} />
 
