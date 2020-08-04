@@ -35,13 +35,15 @@ export const useStyles = makeStyles((theme) => ({
   subPaperStyle: {
     width: "90%",
     height: "40%",
-    padding: "1rem 0",
+    padding: "1rem",
     backgroundColor: theme.colors.lightGray,
     display: "flex",
-    flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-between",
     borderRadius: 12,
+  },
+  textStyle: {
+    padding: "0 3rem",
   },
   titleStyle: {
     fontWeight: "bold",
