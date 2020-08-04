@@ -10,6 +10,12 @@ export const useStyles = makeStyles((theme) => ({
     backgroundAttachment: "fixed",
     backgroundSize: "cover",
   },
+  loadingOverlayStyle: {
+    "& _loading_overlay_wrapper": {
+      width: "100%",
+      height: "100%",
+    },
+  },
   mainGridStyle: {
     height: "100%",
     width: "100%",
