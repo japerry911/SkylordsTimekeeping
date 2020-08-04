@@ -23,7 +23,7 @@ const Clocking = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    const result = goServer.get(`/api/clockings/find-by-userID/${userID}`).then(
+    goServer.get(`/api/clockings/find-by-userID/${userID}`).then(
       (response) => {
         if (response.status === 202) {
           setClockInTime(response.data.ClockIn);
@@ -46,7 +46,7 @@ const Clocking = () => {
         setIsLoading(false);
       }
     );
-  }, [userID, clockingPerformed]);
+  }, [userID, clockingPerformed, dispatch]);
 
   const clockOut = (event) => {
     event.preventDefault();

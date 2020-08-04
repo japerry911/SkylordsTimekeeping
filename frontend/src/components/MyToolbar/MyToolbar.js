@@ -15,7 +15,7 @@ const MyToolbar = ({ title, onMenuClick }) => {
   useEffect(() => {
     const resizeListener = () => setWidthBool(window.innerWidth > 500);
     window.addEventListener("resize", resizeListener);
-    return () => window.removeEventListener("resize");
+    return () => window.removeEventListener("resize", resizeListener);
   }, []);
 
   return (

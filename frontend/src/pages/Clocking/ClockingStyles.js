@@ -11,12 +11,6 @@ export const useStyles = makeStyles((theme) => ({
     backgroundSize: "cover",
     paddingBottom: "3rem",
   },
-  loadingOverlayStyle: {
-    "& _loading_overlay_wrapper": {
-      width: "100%",
-      height: "100%",
-    },
-  },
   mainGridStyle: {
     height: "100%",
     width: "100%",

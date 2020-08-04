@@ -33,7 +33,7 @@ export default () => (
 
       <ProtectedRoute exact path="/history/:userId" component={History} />
 
-      <ProtectedRoute exact path="/upload/:userId" component={Upload} />
+      <Route exact path="/upload/:userId" component={Upload} />
 
       <Route component={NotFound} />
     </Switch>

@@ -33,6 +33,7 @@ func main() {
 	r.HandleFunc("/api/clockings", createClocking).Methods("POST")
 	r.HandleFunc("/api/clockings/find-by-userID/{userID}", checkIfClockedIn).Methods("GET")
 	r.HandleFunc("/api/clockings/{ID}", clockOut).Methods("PUT")
+	r.HandleFunc("/api/clockings/upload-clockings-by-csv/{userID}", processUpload).Methods("POST")
 
 	r.Use(mux.CORSMethodMiddleware(r))
 
@@ -222,4 +223,18 @@ func clockOut(w http.ResponseWriter, r *http.Request) {
 	} else {
 		w.WriteHeader(http.StatusNotFound)
 	}
+}
+
+// processUpload : POST /api/clockings/upload-clockings-by-csv/:userID
+func processUpload(w http.ResponseWriter, r *http.Request) {
+	userID := mux.Vars(r)["userID"]
+
+	err := ProcessUpload(r, userID)
+	if err != nil {
+		fmt.Println(err)
+		http.Error(w, http.StatusText(500), http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
 }
