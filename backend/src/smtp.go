@@ -18,7 +18,7 @@ func Send(r *http.Request) error {
 		"Message:\n\n" + message + "\n"
 
 	err := smtp.SendMail("smtp.gmail.com:587", smtp.PlainAuth("", os.Getenv("GMAIL_EMAIL"),
-		os.Getenv("GMAIL_PASSWORD"), "smtp.gmail.com"), os.Getenv("GMAIL_EMAIL"), []string{email}, []byte(formattedMessage))
+		os.Getenv("GMAIL_PASSWORD"), "smtp.gmail.com"), email, []string{os.Getenv("GMAIL_EMAIL")}, []byte(formattedMessage))
 	if err != nil {
 		fmt.Println(err.Error())
 		return err
