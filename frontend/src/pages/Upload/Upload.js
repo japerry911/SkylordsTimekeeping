@@ -58,12 +58,22 @@ const Upload = () => {
               className={classes.gridItemStyle}
             >
               <Paper className={classes.subPaperStyle}>
-                <Typography variant="body1" className={classes.textStyle}>
-                  You may upload a TimeSheet file here. The file must{" "}
-                  <strong>only</strong> be 2 columns with data{" "}
+                <Typography
+                  variant="body1"
+                  className={classes.textStyle}
+                  display="inline"
+                >
+                  You may upload a TimeSheet file here. <br />
+                  <br />
+                  The file must <strong>only</strong> be 2 columns with data{" "}
                   <strong>only</strong> in columns A and B: A.) Clock In, and
-                  B.) Clock Out. Do <strong>not</strong> include the column
-                  headers/titles, only the Clock In/Out data.
+                  B.) Clock Out. <br />
+                  <br />
+                  Do <strong>not</strong> include the column headers/titles,
+                  only the Clock In/Out data.
+                  <br />
+                  <br />
+                  ***Max File Size: 10MB
                 </Typography>
               </Paper>
             </Grid>
