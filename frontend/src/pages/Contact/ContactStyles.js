@@ -5,6 +5,9 @@ export const useStyles = makeStyles((theme) => ({
     width: "70%",
     display: "flex",
     alignItems: "center",
+    [theme.breakpoints.only("xs")]: {
+      width: "85%",
+    },
   },
   mainDivStyle: {
     minHeight: "95rem",
@@ -94,7 +97,7 @@ export const useStyles = makeStyles((theme) => ({
     margin: "1.15rem 0",
     borderRadius: 12,
     [theme.breakpoints.only("xs")]: {
-      width: "80%",
+      width: "100%",
       "& .MuiFormLabel-root": {
         fontSize: "0.7rem",
       },
