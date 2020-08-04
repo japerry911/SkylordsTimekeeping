@@ -108,3 +108,18 @@ func authenticateUser(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, http.StatusText(401), http.StatusUnauthorized)
 	}
 }
+
+// sendMessage : POST /api/contact/send-email
+func sendMessage(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
+		return
+	}
+
+	err := Send(r)
+	if err != nil {
+		http.Error(w, http.StatusText(500), http.StatusInternalServerError)
+		return
+	}
+
+}
