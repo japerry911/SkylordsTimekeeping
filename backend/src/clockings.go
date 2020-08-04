@@ -3,8 +3,8 @@ package main
 import (
 	"bufio"
 	"errors"
-	"fmt"
 	"net/http"
+	"strings"
 	"time"
 )
 
@@ -91,8 +91,8 @@ func ClockOut(ID string, clockOutTime string) (Clocking, error) {
 	return clocking, nil
 }
 
-// ProcessUpload POST /api/clockings/upload-clockings-by-csv
-func ProcessUpload(r *http.Request) error {
+// ProcessUpload POST /api/clockings/upload-clockings-by-csv/:userID
+func ProcessUpload(r *http.Request, userID string) error {
 	r.ParseMultipartForm(10 << 20)
 
 	file, _, err := r.FormFile("ClockingsFile")
@@ -103,12 +103,32 @@ func ProcessUpload(r *http.Request) error {
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
+	var row []string
+	var parsedTimes [][]string
 	for scanner.Scan() {
-		fmt.Println(scanner.Text())
+		row = strings.Split(scanner.Text(), ",")
+		parsedTimes = append(parsedTimes, row)
 	}
 
 	if err := scanner.Err(); err != nil {
 		return err
+	}
+
+	for _, entry := range parsedTimes {
+		clockedIn, err := time.Parse("2006-01-02 15:04:05", entry[0])
+		if err != nil {
+			return err
+		}
+
+		clockedOut, err := time.Parse("2006-01-02 15:04:05", entry[1])
+		if err != nil {
+			return err
+		}
+
+		_, err = db.Exec("INSERT INTO clockings (UserID, ClockIn, ClockOut) VALUES ($1, $2, $3);", userID, clockedIn, clockedOut)
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil

@@ -17,8 +17,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   mainPaperStyle: {
     backgroundColor: theme.palette.primary.main,
-    width: "35%",
-    height: "70%",
+    width: "45%",
+    height: "80%",
     borderRadius: 12,
     padding: "2rem",
     border: `3pt solid ${theme.palette.secondary.main}`,
@@ -108,5 +108,14 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.only("xs")]: {
       fontSize: "0.6rem",
     },
+  },
+  formStyle: {
+    height: "100%",
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "spaced-evenly",
+    marginTop: "1rem",
   },
 }));
