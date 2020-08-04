@@ -62,7 +62,7 @@ const SignIn = ({ history }) => {
             className={classes.mainContainerStyle}
           >
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} align="center">
-              <Paper className={classes.paperStyle}>
+              <Paper className={classes.paperStyle} elevation={5}>
                 <Typography variant="h2" className={classes.titleStyle}>
                   SIGN IN
                 </Typography>
@@ -83,7 +83,8 @@ const SignIn = ({ history }) => {
                   lg={12}
                   xl={12}
                   align="center"
-                  justify="center"
+                  justify="space-between"
+                  direction="column"
                 >
                   <form className={classes.formStyle} onSubmit={handleSignIn}>
                     <Paper className={classes.subPaperStyle}>
