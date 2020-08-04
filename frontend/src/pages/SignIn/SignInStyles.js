@@ -2,22 +2,41 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 export const useStyles = makeStyles((theme) => ({
   mainDivStyle: {
-    minHeight: "100%",
+    minHeight: "80rem",
     width: "100%",
     backgroundColor: theme.palette.secondary.main,
-    paddingBottom: "10rem",
+    paddingBottom: "3rem",
+    [theme.breakpoints.only("xs")]: {
+      minHeight: "70rem",
+    },
   },
   logoImgStyle: {
     width: "40%",
     height: "auto",
   },
   paperStyle: {
-    padding: "2rem 0",
+    padding: "1rem 0",
     marginTop: "3rem",
-    height: "90%",
+    height: "100%",
     width: "50%",
     backgroundColor: theme.palette.primary.main,
     borderRadius: 12,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-between",
+    [theme.breakpoints.only("md")]: {
+      height: "100%",
+      width: "80%",
+    },
+    [theme.breakpoints.only("sm")]: {
+      height: "100%",
+      width: "90%",
+    },
+    [theme.breakpoints.only("xs")]: {
+      height: "80%",
+      width: "92%",
+    },
   },
   titleStyle: {
     fontWeight: "bold",
@@ -37,6 +56,13 @@ export const useStyles = makeStyles((theme) => ({
       color: theme.palette.primary.main,
       transition: "220ms ease-in-out",
     },
+    [theme.breakpoints.only("sm")]: {
+      width: "40%",
+    },
+    [theme.breakpoints.only("xs")]: {
+      width: "42%",
+      fontSize: ".6rem",
+    },
   },
   dividerStyle: {
     backgroundColor: theme.palette.secondary.main,
@@ -45,17 +71,26 @@ export const useStyles = makeStyles((theme) => ({
   textFieldStyle: {
     width: "70%",
     margin: "1.5rem 0",
+    [theme.breakpoints.only("xs")]: {
+      width: "80%",
+      "& .MuiFormLabel-root": {
+        fontSize: "0.7rem",
+      },
+    },
   },
   subPaperStyle: {
     width: "70%",
-    height: "75%",
-    padding: "3rem 0",
+    height: "90%",
+    padding: "1rem 0",
     backgroundColor: theme.colors.lightGray,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-between",
     borderRadius: 12,
+    [theme.breakpoints.only("xs")]: {
+      width: "88%",
+    },
   },
   mainContainerStyle: {
     minHeight: "40rem",
@@ -64,7 +99,7 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     width: "100%",
     justifyContent: "space-evenly",
-    alignItems: "center",
+    alignItems: "flex-end",
     paddingTop: "2rem",
   },
   formStyle: {
