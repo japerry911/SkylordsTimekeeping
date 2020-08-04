@@ -7,6 +7,7 @@ import goServer from "../../api/goServer";
 import { useSelector, useDispatch } from "react-redux";
 import { handleOpen } from "../../redux/actions/snackbarActions";
 import LoadingOverlay from "react-loading-overlay";
+import Button from "@material-ui/core/Button";
 import { useStyles } from "./ClockingStyles";
 
 const Clocking = () => {
@@ -109,19 +110,13 @@ const Clocking = () => {
               className={classes.gridItemStyle}
               align="center"
             >
-              <Paper className={classes.subPaperStyle}></Paper>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={12}
-              md={12}
-              lg={12}
-              xl={12}
-              className={classes.gridItemStyle}
-              align="center"
-            >
-              <Paper className={classes.subPaperStyle}></Paper>
+              <Paper className={classes.subPaperCenteredStyle}>
+                {clockInTime ? (
+                  <Button className={classes.buttonStyle}>Clock Out</Button>
+                ) : (
+                  <Button className={classes.buttonStyle}>Clock In</Button>
+                )}
+              </Paper>
             </Grid>
           </Paper>
         </Grid>

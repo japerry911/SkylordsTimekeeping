@@ -42,6 +42,16 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     borderRadius: 12,
   },
+  subPaperCenteredStyle: {
+    width: "40%",
+    height: "40%",
+    padding: "1rem",
+    backgroundColor: theme.colors.lightGray,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 12,
+  },
   textStyle: {
     padding: "0 3rem",
   },
@@ -60,5 +70,26 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
+  },
+  buttonStyle: {
+    backgroundColor: theme.palette.primary.main,
+    border: `1pt solid ${theme.palette.secondary.main}`,
+    color: theme.palette.secondary.main,
+    width: "90%",
+    borderRadius: 12,
+    padding: "1rem",
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+      border: `1pt solid ${theme.palette.primary.main}`,
+      color: theme.palette.primary.main,
+      transition: "220ms ease-in-out",
+    },
+    [theme.breakpoints.only("sm")]: {
+      width: "40%",
+    },
+    [theme.breakpoints.only("xs")]: {
+      width: "42%",
+      fontSize: ".6rem",
+    },
   },
 }));
