@@ -60,9 +60,9 @@ func ifExistsByUsername(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if exists {
-		http.Error(w, http.StatusText(202), http.StatusAccepted)
+		w.WriteHeader(http.StatusAccepted)
 	} else {
-		http.Error(w, http.StatusText(200), http.StatusOK)
+		w.WriteHeader(http.StatusOK)
 	}
 }
 
