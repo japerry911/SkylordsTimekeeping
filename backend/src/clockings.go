@@ -19,7 +19,7 @@ func CreateClocking(r *http.Request) (Clocking, error) {
 	clocking := Clocking{}
 
 	clocking.UserID = r.FormValue("UserID")
-	parsedTime, err := time.Parse("2006-01-02", r.FormValue("ClockIn"))
+	parsedTime, err := time.Parse("2006-01-02 15:04:05", r.FormValue("ClockIn"))
 
 	if err != nil {
 		return clocking, err

@@ -29,7 +29,7 @@ func main() {
 	r.HandleFunc("/api/users/authentication", authenticateUser).Methods("POST")
 	r.HandleFunc("/api/users/if-exists-by-username/{username}", ifExistsByUsername).Methods("GET")
 	r.HandleFunc("/api/contact/send-message", sendMessage).Methods("POST")
-	r.HandleFunc("/api/clocking", createClocking).Methods("POST")
+	r.HandleFunc("/api/clockings", createClocking).Methods("POST")
 
 	r.Use(mux.CORSMethodMiddleware(r))
 
@@ -134,7 +134,7 @@ func sendMessage(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
-// createClocking : POST /api/clocking
+// createClocking : POST /api/clockings
 func createClocking(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
