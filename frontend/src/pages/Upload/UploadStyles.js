@@ -55,7 +55,7 @@ export const useStyles = makeStyles((theme) => ({
   subPaperCenteredStyle: {
     width: "90%",
     height: "40%",
-    padding: "1rem",
+    padding: "0.75rem",
     backgroundColor: theme.colors.lightGray,
     display: "flex",
     alignItems: "center",
@@ -63,7 +63,7 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: 12,
     [theme.breakpoints.only("xs")]: {
       width: "100%",
-      padding: "1rem 0",
+      padding: "0.75rem 0",
     },
   },
   buttonStyle: {
@@ -93,15 +93,22 @@ export const useStyles = makeStyles((theme) => ({
   subPaperStyle: {
     textIndent: 50,
     width: "90%",
-    height: "40%",
-    padding: "1rem",
+    height: "80%",
+    padding: "0.75rem",
     backgroundColor: theme.colors.lightGray,
     display: "flex",
     alignItems: "center",
     borderRadius: 12,
     [theme.breakpoints.only("xs")]: {
       width: "100%",
-      padding: "1rem 0",
+      padding: "0.75rem 0",
+      textIndent: 25,
+    },
+  },
+  textStyle: {
+    padding: "0 1rem",
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "0.6rem",
     },
   },
 }));
