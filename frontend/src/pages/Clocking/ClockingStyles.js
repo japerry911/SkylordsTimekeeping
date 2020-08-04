@@ -43,7 +43,7 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: 12,
   },
   subPaperCenteredStyle: {
-    width: "40%",
+    width: "90%",
     height: "40%",
     padding: "1rem",
     backgroundColor: theme.colors.lightGray,
