@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 
@@ -30,6 +31,7 @@ func main() {
 	r.HandleFunc("/api/users/if-exists-by-username/{username}", ifExistsByUsername).Methods("GET")
 	r.HandleFunc("/api/contact/send-message", sendMessage).Methods("POST")
 	r.HandleFunc("/api/clockings", createClocking).Methods("POST")
+	r.HandleFunc("/api/clockings/find-by-userID/{userID}", checkIfClockedIn).Methods("GET")
 
 	r.Use(mux.CORSMethodMiddleware(r))
 
@@ -60,6 +62,11 @@ func getUsers(w http.ResponseWriter, r *http.Request) {
 
 // lookUpUserByUsername : GET /api/users/if-exists-by-username/:username
 func ifExistsByUsername(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "GET" {
+		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
+		return
+	}
+
 	username := mux.Vars(r)["username"]
 
 	exists, err := IfExistsByUsername(username)
@@ -154,4 +161,34 @@ func createClocking(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Write(clockingJSON)
+}
+
+// checkIfClockedIn : GET /api/clockings/find-by-userID/:userID
+func checkIfClockedIn(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "GET" {
+		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
+		return
+	}
+
+	userID := mux.Vars(r)["userID"]
+
+	clocking, existing, err := CheckIfClockedIn(userID)
+	if err != nil {
+		fmt.Println(err)
+		http.Error(w, http.StatusText(500), http.StatusInternalServerError)
+		return
+	}
+
+	if !existing {
+		w.WriteHeader(http.StatusOK)
+	} else {
+		clockingJSON, err := json.Marshal(clocking)
+		if err != nil {
+			http.Error(w, http.StatusText(500), http.StatusInternalServerError)
+			return
+		}
+
+		w.WriteHeader(http.StatusAccepted)
+		w.Write(clockingJSON)
+	}
 }

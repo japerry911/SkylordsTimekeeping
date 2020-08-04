@@ -33,3 +33,26 @@ func CreateClocking(r *http.Request) (Clocking, error) {
 
 	return clocking, nil
 }
+
+// CheckIfClockedIn GET /api/clockings/search-by-userID/:userID
+func CheckIfClockedIn(userID string) (Clocking, bool, error) {
+	clocking := Clocking{}
+
+	row, err := db.Query("SELECT ID, UserID, ClockIn FROM clockings WHERE UserID = $1 AND ClockOut IS NULL;", userID)
+	if err != nil {
+		return clocking, false, err
+	}
+
+	defer row.Close()
+
+	if !row.Next() {
+		return clocking, false, nil
+	}
+
+	err = row.Scan(&clocking.ID, &clocking.UserID, &clocking.ClockIn)
+	if err != nil {
+		return clocking, false, err
+	}
+
+	return clocking, true, nil
+}
