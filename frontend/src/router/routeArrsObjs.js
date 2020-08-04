@@ -4,6 +4,9 @@ import PhoneIcon from "@material-ui/icons/PhoneOutlined";
 import KeyIcon from "@material-ui/icons/VpnKeyOutlined";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import WelcomeIcon from "@material-ui/icons/EmojiPeople";
+import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
+import PublishIcon from "@material-ui/icons/Publish";
 
 export const NONAUTH_ROUTES_ARRAY = [
   { path: "/", title: "Home", icon: HomeIcon },
@@ -14,7 +17,10 @@ export const NONAUTH_ROUTES_ARRAY = [
 ];
 
 export const AUTH_ROUTES_ARRAY = [
-  { path: "/welcome", title: "Welcome", icon: WelcomeIcon },
+  { path: "/welcome/", title: "Welcome", icon: WelcomeIcon },
+  { path: "/clocking/", title: "Clocking", icon: AccessAlarmIcon },
+  { path: "/history/", title: "History", icon: LibraryBooksIcon },
+  { path: "/upload/", title: "Upload", icon: PublishIcon },
 ];
 
 export const ROUTES_OBJECT = {
@@ -24,6 +30,9 @@ export const ROUTES_OBJECT = {
   "/sign-in": "Sign In",
   "/register-user": "Create Account",
   "/welcome": "Welcome",
+  "/clocking": "Clocking",
+  "/history": "History",
+  "/upload": "Upload",
 };
 
 export const FOOTER_NONAUTH_POSTION_OBJECT = {
@@ -36,4 +45,7 @@ export const FOOTER_NONAUTH_POSTION_OBJECT = {
 
 export const FOOTER_AUTH_POSTION_OBJECT = {
   "/welcome": 0,
+  "/clocking": 1,
+  "/history": 2,
+  "/upload": 3,
 };

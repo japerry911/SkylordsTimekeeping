@@ -15,6 +15,7 @@ const Footer = ({ location }) => {
   const classes = useStyles();
 
   const isAuthed = useSelector((state) => state.users.authed);
+  const userId = useSelector((state) => state.users.user.ID);
 
   const [value, setValue] = useState(
     !isAuthed && FOOTER_NONAUTH_POSTION_OBJECT[location.pathname] !== undefined
@@ -28,7 +29,8 @@ const Footer = ({ location }) => {
     if (!isAuthed) {
       setValue(FOOTER_NONAUTH_POSTION_OBJECT[location.pathname]);
     } else {
-      setValue(FOOTER_AUTH_POSTION_OBJECT[location.pathname]);
+      const shortenedPath = location.pathname.replace(/\/[0-9]+/g, "");
+      setValue(FOOTER_AUTH_POSTION_OBJECT[shortenedPath]);
     }
   }, [location.pathname, isAuthed]);
 
@@ -66,7 +68,7 @@ const Footer = ({ location }) => {
                 label={routeObject.title}
                 icon={<routeObject.icon />}
                 component={Link}
-                to={routeObject.path}
+                to={routeObject.path + userId}
                 className={classes.tabStyle}
                 classes={{
                   selected: classes.tabSelectedStyle,

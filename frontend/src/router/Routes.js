@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Route, Redirect, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Home from "../pages/Home/Home";
 import About from "../pages/About/About";
 import Contact from "../pages/Contact/Contact";
@@ -9,6 +9,9 @@ import CreateAccount from "../pages/CreateAccount/CreateAccount";
 import ProtectedRoute from "./ProtectedRoute";
 import Welcome from "../pages/Welcome/Welcome";
 import NotFound from "../pages/NotFound/NotFound";
+import Clocking from "../pages/Clocking/Clocking";
+import History from "../pages/History/History";
+import Upload from "../pages/Upload/Upload";
 
 export default () => (
   <Fragment>
@@ -24,7 +27,13 @@ export default () => (
 
       <Route exact path="/register-user" component={CreateAccount} />
 
-      <ProtectedRoute exact path="/welcome" component={Welcome} />
+      <ProtectedRoute exact path="/welcome/:userId" component={Welcome} />
+
+      <ProtectedRoute exact path="/clocking/:userId" component={Clocking} />
+
+      <ProtectedRoute exact path="/history/:userId" component={History} />
+
+      <ProtectedRoute exact path="/upload/:userId" component={Upload} />
 
       <Route component={NotFound} />
     </Switch>

@@ -16,6 +16,7 @@ const MyDrawer = ({ open, onClose }) => {
   const classes = useStyles();
 
   const isAuthed = useSelector((state) => state.users.authed);
+  const userId = useSelector((state) => state.users.user.ID);
 
   return (
     <Drawer
@@ -58,7 +59,7 @@ const MyDrawer = ({ open, onClose }) => {
                     onClose();
                   }}
                   component={Link}
-                  to={routeObject.path}
+                  to={routeObject.path + userId}
                 >
                   <ListItemText>{routeObject.title}</ListItemText>
                   {routeObject.icon ? (

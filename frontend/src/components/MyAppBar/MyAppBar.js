@@ -10,9 +10,9 @@ const MyAppBar = ({ location }) => {
 
   const [drawer, setDrawer] = useState(false);
   const [title, setTitle] = useState(
-    ROUTES_OBJECT[location.pathname] === undefined
+    ROUTES_OBJECT[location.pathname.replace(/\/[0-9]+/g, "")] === undefined
       ? "Unknown Page"
-      : ROUTES_OBJECT[location.pathname]
+      : ROUTES_OBJECT[location.pathname.replace(/\/[0-9]+/g, "")]
   );
 
   const toggleDrawer = () => {
@@ -20,7 +20,13 @@ const MyAppBar = ({ location }) => {
   };
 
   useEffect(() => {
-    setTitle(ROUTES_OBJECT[location.pathname]);
+    setTitle(
+      (ROUTES_OBJECT[location.pathname.replace(/\/[0-9]+/g, "")] ===
+        undefined) ===
+        undefined
+        ? "Unknown Page"
+        : ROUTES_OBJECT[location.pathname.replace(/\/[0-9]+/g, "")]
+    );
   }, [location.pathname]);
 
   return (

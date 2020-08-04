@@ -33,7 +33,7 @@ export const signIn = (username, password) => {
     return goServer.post("/api/users/authentication", formData).then(
       (response) => {
         dispatch(success(_.pick(response.data, "ID", "UserName", "Email")));
-        return true;
+        return _.pick(response.data, "ID");
       },
       (error) => {
         dispatch(failed(error));
