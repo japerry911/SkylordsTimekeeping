@@ -35,7 +35,7 @@ const Clocking = () => {
           handleOpen({
             type: "error",
             message:
-              "Error in retrieving Clock In data. Please wait a few seconds, and then try again",
+              "Error in retrieving Clock In data. Please wait a few seconds, and then reload the page",
           })
         );
         setIsLoading(false);

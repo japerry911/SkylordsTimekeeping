@@ -32,6 +32,7 @@ func main() {
 	r.HandleFunc("/api/contact/send-message", sendMessage).Methods("POST")
 	r.HandleFunc("/api/clockings", createClocking).Methods("POST")
 	r.HandleFunc("/api/clockings/find-by-userID/{userID}", checkIfClockedIn).Methods("GET")
+	r.HandleFunc("/api/clockings/{ID}", clockOut).Methods("PUT")
 
 	r.Use(mux.CORSMethodMiddleware(r))
 
@@ -174,7 +175,6 @@ func checkIfClockedIn(w http.ResponseWriter, r *http.Request) {
 
 	clocking, existing, err := CheckIfClockedIn(userID)
 	if err != nil {
-		fmt.Println(err)
 		http.Error(w, http.StatusText(500), http.StatusInternalServerError)
 		return
 	}
@@ -190,5 +190,36 @@ func checkIfClockedIn(w http.ResponseWriter, r *http.Request) {
 
 		w.WriteHeader(http.StatusAccepted)
 		w.Write(clockingJSON)
+	}
+}
+
+// clockOut : PUT /api/clockings/:ID
+func clockOut(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "PUT" {
+		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
+		return
+	}
+
+	ID := mux.Vars(r)["ID"]
+	clockOutTime := r.FormValue("ClockOutTime")
+
+	clocking, err := ClockOut(ID, clockOutTime)
+	if err != nil {
+		fmt.Println(err)
+		http.Error(w, http.StatusText(500), http.StatusInternalServerError)
+		return
+	}
+
+	if clocking.ID != "" {
+		clockingJSON, err := json.Marshal(clocking)
+		if err != nil {
+			http.Error(w, http.StatusText(500), http.StatusInternalServerError)
+			return
+		}
+
+		w.WriteHeader(http.StatusOK)
+		w.Write(clockingJSON)
+	} else {
+		w.WriteHeader(http.StatusNotFound)
 	}
 }
