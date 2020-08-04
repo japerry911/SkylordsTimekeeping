@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"errors"
+	"fmt"
 	"net/http"
 	"time"
 )
@@ -87,4 +89,27 @@ func ClockOut(ID string, clockOutTime string) (Clocking, error) {
 	clocking.ClockOut = parsedTime
 
 	return clocking, nil
+}
+
+// ProcessUpload POST /api/clockings/upload-clockings-by-csv
+func ProcessUpload(r *http.Request) error {
+	r.ParseMultipartForm(10 << 20)
+
+	file, handler, err := r.FormValue("ClockingsFile")
+	if err != nil {
+		return err
+	}
+
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		fmt.Println(scanner.Text())
+	}
+
+	if err := scanner.Err(); err != nil {
+		return err
+	}
+
+	return nil
 }
