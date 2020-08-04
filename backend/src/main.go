@@ -20,7 +20,7 @@ func init() {
 func main() {
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"http://localhost:3000"},
-		AllowedMethods: []string{"GET", "POST"},
+		AllowedMethods: []string{"GET", "POST", "PUT"},
 	})
 
 	r := mux.NewRouter()

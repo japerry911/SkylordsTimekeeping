@@ -15,6 +15,8 @@ const Clocking = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [clockInTime, setClockInTime] = useState(null);
+  const [clockingPerformed, setClockingPerformed] = useState(0);
+  const [clockId, setClockId] = useState(null);
 
   let userID = useSelector((state) => state.users.user.ID);
   const dispatch = useDispatch();
@@ -26,6 +28,10 @@ const Clocking = () => {
       (response) => {
         if (response.status === 202) {
           setClockInTime(response.data.ClockIn);
+          setClockId(response.data.ID);
+        } else {
+          setClockInTime(null);
+          setClockId(null);
         }
 
         setIsLoading(false);
@@ -41,7 +47,68 @@ const Clocking = () => {
         setIsLoading(false);
       }
     );
-  }, [userID]);
+  }, [userID, clockingPerformed]);
+
+  const clockOut = (event) => {
+    event.preventDefault();
+
+    setIsLoading(true);
+
+    const clockOutTime = new Date().toISOString();
+    const formData = new FormData();
+
+    formData.set("ClockOutTime", clockOutTime);
+
+    goServer.put(`/api/clockings/${clockId}`, formData).then(
+      (response) => {
+        console.log(response);
+        setClockingPerformed(clockingPerformed === 1 ? 0 : 1);
+        setIsLoading(false);
+      },
+      (error) => {
+        console.log(error);
+        dispatch(
+          handleOpen({
+            type: "error",
+            message:
+              "Process Failed. Please try again in a few seconds after reloading the page",
+          })
+        );
+        setIsLoading(false);
+      }
+    );
+  };
+
+  const clockIn = (event) => {
+    event.preventDefault();
+
+    setIsLoading(true);
+
+    const clockInTime = new Date().toISOString();
+    const formData = new FormData();
+
+    formData.set("UserID", 1);
+    formData.set("ClockIn", clockInTime);
+
+    goServer.post("/api/clockings", formData).then(
+      (response) => {
+        console.log(response);
+        setClockingPerformed(clockingPerformed === 0 ? 1 : 0);
+        setIsLoading(false);
+      },
+      (error) => {
+        console.log(error);
+        dispatch(
+          handleOpen({
+            type: "error",
+            message:
+              "Process Failed. Please try again in a few seconds after reloading the page",
+          })
+        );
+        setIsLoading(false);
+      }
+    );
+  };
 
   return (
     <div className={classes.mainDivStyle}>
@@ -112,9 +179,13 @@ const Clocking = () => {
             >
               <Paper className={classes.subPaperCenteredStyle}>
                 {clockInTime ? (
-                  <Button className={classes.buttonStyle}>Clock Out</Button>
+                  <Button className={classes.buttonStyle} onClick={clockOut}>
+                    Clock Out
+                  </Button>
                 ) : (
-                  <Button className={classes.buttonStyle}>Clock In</Button>
+                  <Button className={classes.buttonStyle} onClick={clockIn}>
+                    Clock In
+                  </Button>
                 )}
               </Paper>
             </Grid>

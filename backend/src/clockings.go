@@ -19,7 +19,7 @@ func CreateClocking(r *http.Request) (Clocking, error) {
 	clocking := Clocking{}
 
 	clocking.UserID = r.FormValue("UserID")
-	parsedTime, err := time.Parse("2006-01-02 15:04:05", r.FormValue("ClockIn"))
+	parsedTime, err := time.Parse("2006-01-02T15:04:05.000Z", r.FormValue("ClockIn"))
 
 	if err != nil {
 		return clocking, err
@@ -74,12 +74,12 @@ func ClockOut(ID string, clockOutTime string) (Clocking, error) {
 
 	err = row.Scan(&clocking.ID, &clocking.UserID, &clocking.ClockIn)
 
-	parsedTime, err := time.Parse("2006-01-02 15:04:05", clockOutTime)
+	parsedTime, err := time.Parse("2006-01-02T15:04:05.000Z", clockOutTime)
 	if err != nil {
 		return Clocking{}, err
 	}
 
-	_, err = db.Exec("UPDATE clockings SET ID = $1, UserID = $2, ClockIn = $3, ClockOut = $4", clocking.ID, clocking.UserID, clocking.ClockIn, parsedTime)
+	_, err = db.Exec("UPDATE clockings SET ID = $1, UserID = $2, ClockIn = $3, ClockOut = $4 WHERE ID = $1", clocking.ID, clocking.UserID, clocking.ClockIn, parsedTime)
 	if err != nil {
 		return Clocking{}, err
 	}
