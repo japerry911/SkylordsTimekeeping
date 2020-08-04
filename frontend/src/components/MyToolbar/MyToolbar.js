@@ -23,17 +23,19 @@ const MyToolbar = ({ title, onMenuClick }) => {
               />
             </Link>
           </figure>
-          <IconButton
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="Menu"
-            onClick={onMenuClick}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h5" color="inherit" className={classes.flex}>
-            {title}
-          </Typography>
+          <div className={classes.rightStyle}>
+            <IconButton
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="Menu"
+              onClick={onMenuClick}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h5" color="inherit" align="right">
+              {title}
+            </Typography>
+          </div>
         </Toolbar>
       </AppBar>
       <div className={classes.toolbarMargin} />

@@ -13,12 +13,15 @@ export const useStyles = makeStyles((theme) => ({
   logoImgStyle: {
     width: "40%",
     height: "auto",
+    [theme.breakpoints.only("xs")]: {
+      width: "100%",
+    },
   },
   paperStyle: {
     padding: "1rem 0",
     marginTop: "3rem",
     height: "100%",
-    width: "50%",
+    width: "47%",
     backgroundColor: theme.palette.primary.main,
     borderRadius: 12,
     display: "flex",
@@ -90,6 +93,7 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: 12,
     [theme.breakpoints.only("xs")]: {
       width: "88%",
+      padding: "0.5rem 0",
     },
   },
   mainContainerStyle: {

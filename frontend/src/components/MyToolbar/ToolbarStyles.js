@@ -7,22 +7,28 @@ export const useStyles = makeStyles((theme) => ({
   },
   toolbarMargin: theme.mixins.toolbar,
   logoStyle: {
-    width: "15%",
+    width: "35%",
     [theme.breakpoints.only("md")]: {
-      width: "50%",
-    },
-    [theme.breakpoints.only("sm")]: {
       width: "55%",
     },
-    [theme.breakpoints.only("xs")]: {
+    [theme.breakpoints.only("sm")]: {
       width: "80%",
+    },
+    [theme.breakpoints.only("xs")]: {
+      width: "100%",
     },
   },
   figureStyle: {
-    width: "85%",
+    width: "90%",
     marginBlockStart: 0,
     marginBlockEnd: 0,
     marginInlineStart: 0,
     marginInlineEnd: 0,
+  },
+  rightStyle: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    width: "100%",
   },
 }));
