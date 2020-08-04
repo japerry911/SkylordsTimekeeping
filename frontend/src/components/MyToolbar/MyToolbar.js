@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Toolbar from "@material-ui/core/Toolbar";
 import AppBar from "@material-ui/core/AppBar";
 import IconButton from "@material-ui/core/IconButton";
@@ -9,6 +9,14 @@ import { useStyles } from "./ToolbarStyles";
 
 const MyToolbar = ({ title, onMenuClick }) => {
   const classes = useStyles();
+
+  const [widthBool, setWidthBool] = useState(window.innerWidth > 500);
+
+  useEffect(() => {
+    const resizeListener = () => setWidthBool(window.innerWidth > 500);
+    window.addEventListener("resize", resizeListener);
+    return () => window.removeEventListener("resize");
+  }, []);
 
   return (
     <Fragment>
@@ -32,9 +40,11 @@ const MyToolbar = ({ title, onMenuClick }) => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h5" color="inherit" align="right">
-              {title}
-            </Typography>
+            {widthBool ? (
+              <Typography variant="h6" color="inherit" align="right">
+                {title}
+              </Typography>
+            ) : null}
           </div>
         </Toolbar>
       </AppBar>
