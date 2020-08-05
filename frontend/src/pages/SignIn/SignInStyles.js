@@ -21,7 +21,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: "1rem 0",
     marginTop: "3rem",
     height: "100%",
-    width: "47%",
+    width: "60%",
     backgroundColor: theme.palette.primary.main,
     borderRadius: 12,
     display: "flex",
@@ -50,7 +50,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.main,
     border: `1pt solid ${theme.palette.secondary.main}`,
     color: theme.palette.secondary.main,
-    width: "30%",
+    width: "38%",
     borderRadius: 12,
     padding: "1rem",
     "&:hover": {
@@ -82,7 +82,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   subPaperStyle: {
-    width: "70%",
+    width: "80%",
     height: "90%",
     padding: "1rem 0",
     backgroundColor: theme.colors.lightGray,

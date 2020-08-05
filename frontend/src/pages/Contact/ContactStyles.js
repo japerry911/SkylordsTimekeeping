@@ -29,7 +29,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: "1rem 0",
     marginTop: "3rem",
     height: "100%",
-    width: "47%",
+    width: "60%",
     backgroundColor: theme.palette.primary.main,
     borderRadius: 12,
     display: "flex",
@@ -107,7 +107,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   subPaperStyle: {
-    width: "70%",
+    width: "80%",
     height: "90%",
     padding: "1rem 0",
     backgroundColor: theme.colors.lightGray,
@@ -132,6 +132,9 @@ export const useStyles = makeStyles((theme) => ({
     paddingTop: "2rem",
   },
   formStyle: {
+    width: "100%",
+  },
+  textGridStyle: {
     width: "100%",
   },
 }));

@@ -12,8 +12,10 @@ import allReducers from "./redux/reducers/index";
 const store = createStore(
   allReducers,
   compose(
-    applyMiddleware(thunkMiddleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    applyMiddleware(
+      thunkMiddleware
+    ) /*,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()*/
   )
 );
 

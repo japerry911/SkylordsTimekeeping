@@ -17,6 +17,7 @@ export const useStyles = makeStyles((theme) => ({
   mainTitleStyle: {
     color: theme.palette.secondary.main,
     fontWeight: "bold",
+    paddingBottom: "2rem",
   },
   paperStyle: {
     backgroundColor: theme.palette.primary.main,

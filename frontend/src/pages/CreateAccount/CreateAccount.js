@@ -147,74 +147,126 @@ const CreateAccount = ({ history }) => {
               justify="center"
             >
               <form className={classes.formStyle} onSubmit={onSubmit}>
-                <Paper className={classes.subPaperStyle}>
-                  <TextField
-                    label="Username"
-                    type="text"
-                    required
-                    onChange={(newUsername) =>
-                      setUsername(newUsername.target.value)
-                    }
-                    helperText="Username must be at least 7 characters long"
-                    value={username}
-                    className={classes.textFieldStyle}
-                  />
-                  <TextField
-                    label="Email"
-                    type="text"
-                    required
-                    onChange={(newEmail) => setEmail(newEmail.target.value)}
-                    helperText="Email must be a valid email address"
-                    value={email}
-                    className={classes.textFieldStyle}
-                  />
-                  <TextField
-                    label="Password"
-                    type="password"
-                    required
-                    onChange={(newPassword) =>
-                      setPassword(newPassword.target.value)
-                    }
-                    helperText="Password must contain an Uppercase letter, Lowercase letter, Number, and be at least 7 characters long"
-                    value={password}
-                    className={classes.textFieldStyle}
-                  />
-                  <TextField
-                    label="Confirm Password"
-                    type="password"
-                    required
-                    onChange={(newConfirmPassword) =>
-                      setConfirmPassword(newConfirmPassword.target.value)
-                    }
-                    value={confirmPassword}
-                    className={classes.textFieldStyle}
-                  />
-                  <Grid
-                    container
-                    item
-                    xs={12}
-                    sm={12}
-                    md={12}
-                    lg={12}
-                    xl={12}
-                    className={classes.buttonGridStyle}
-                  >
-                    <Button
-                      className={classes.buttonStyle}
-                      component={Link}
-                      to="sign-in"
+                <Grid
+                  container
+                  item
+                  xs={12}
+                  sm={12}
+                  md={12}
+                  lg={12}
+                  xl={12}
+                  align="center"
+                  justify="center"
+                >
+                  <Paper className={classes.subPaperStyle}>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={12}
+                      md={12}
+                      lg={12}
+                      xl={12}
+                      className={classes.textGridStyle}
                     >
-                      Existing User
-                    </Button>
-                    <Button
-                      className={classes.buttonStyle}
-                      disabled={!(username && email && passwordValidation)}
-                      type="submit"
+                      <TextField
+                        label="Username"
+                        type="text"
+                        required
+                        onChange={(newUsername) =>
+                          setUsername(newUsername.target.value)
+                        }
+                        helperText="Username must be at least 7 characters long"
+                        value={username}
+                        className={classes.textFieldStyle}
+                      />
+                    </Grid>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={12}
+                      md={12}
+                      lg={12}
+                      xl={12}
+                      className={classes.textGridStyle}
                     >
-                      Create Account
-                    </Button>
-                  </Grid>
-                </Paper>
+                      <TextField
+                        label="Email"
+                        type="text"
+                        required
+                        onChange={(newEmail) => setEmail(newEmail.target.value)}
+                        helperText="Email must be a valid email address"
+                        value={email}
+                        className={classes.textFieldStyle}
+                      />
+                    </Grid>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={12}
+                      md={12}
+                      lg={12}
+                      xl={12}
+                      className={classes.textGridStyle}
+                    >
+                      <TextField
+                        label="Password"
+                        type="password"
+                        required
+                        onChange={(newPassword) =>
+                          setPassword(newPassword.target.value)
+                        }
+                        helperText="Password must contain an Uppercase letter, Lowercase letter, Number, and be at least 7 characters long"
+                        value={password}
+                        className={classes.textFieldStyle}
+                      />
+                    </Grid>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={12}
+                      md={12}
+                      lg={12}
+                      xl={12}
+                      className={classes.textGridStyle}
+                    >
+                      <TextField
+                        label="Confirm Password"
+                        type="password"
+                        required
+                        onChange={(newConfirmPassword) =>
+                          setConfirmPassword(newConfirmPassword.target.value)
+                        }
+                        value={confirmPassword}
+                        className={classes.textFieldStyle}
+                      />
+                    </Grid>
+                    <Grid
+                      container
+                      item
+                      xs={12}
+                      sm={12}
+                      md={12}
+                      lg={12}
+                      xl={12}
+                      className={classes.buttonGridStyle}
+                    >
+                      <Button
+                        className={classes.buttonStyle}
+                        component={Link}
+                        to="sign-in"
+                      >
+                        Existing User
+                      </Button>
+                      <Button
+                        className={classes.buttonStyle}
+                        disabled={!(username && email && passwordValidation)}
+                        type="submit"
+                      >
+                        Create Account
+                      </Button>
+                    </Grid>
+                  </Paper>
+                </Grid>
               </form>
             </Grid>
           </Paper>

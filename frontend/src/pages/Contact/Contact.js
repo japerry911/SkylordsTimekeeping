@@ -109,63 +109,107 @@ const Contact = () => {
                   justify="center"
                 >
                   <form className={classes.formStyle} onSubmit={onSubmit}>
-                    <Paper className={classes.subPaperStyle}>
-                      <TextField
-                        label="Email"
-                        type="text"
-                        required
-                        onChange={(newEmail) => setEmail(newEmail.target.value)}
-                        helperText="Email must be a valid email address"
-                        value={email}
-                        className={classes.textFieldStyle}
-                      />
-                      <TextField
-                        label="Subject"
-                        type="text"
-                        required
-                        onChange={(newSubject) =>
-                          setSubject(newSubject.target.value)
-                        }
-                        helperText="Password must contain an Uppercase letter, Lowercase letter, Number, and be at least 7 characters long"
-                        value={subject}
-                        className={classes.textFieldStyle}
-                      />
-                      <FormControl className={classes.formControlStyle}>
-                        <InputLabel
-                          shrink={message !== ""}
-                          style={{ position: "absolute" }}
+                    <Grid
+                      container
+                      item
+                      xs={12}
+                      sm={12}
+                      md={12}
+                      lg={12}
+                      xl={12}
+                      align="center"
+                      justify="center"
+                    >
+                      <Paper className={classes.subPaperStyle}>
+                        <Grid
+                          item
+                          xs={12}
+                          sm={12}
+                          md={12}
+                          lg={12}
+                          xl={12}
+                          className={classes.textGridStyle}
                         >
-                          Message*
-                        </InputLabel>
-                        <TextareaAutosize
-                          required
-                          onChange={(newMessage) =>
-                            setMessage(newMessage.target.value)
-                          }
-                          rowsMin={15}
-                          rowsMax={15}
-                          className={classes.bigTextFieldStyle}
-                        />
-                      </FormControl>
-                      <Grid
-                        container
-                        item
-                        xs={12}
-                        sm={12}
-                        md={12}
-                        lg={12}
-                        xl={12}
-                        className={classes.buttonGridStyle}
-                      >
-                        <Button
-                          className={classes.buttonStyle}
-                          disabled={!(email && subject && message)}
-                          type="submit"
+                          <TextField
+                            label="Email"
+                            type="text"
+                            required
+                            onChange={(newEmail) =>
+                              setEmail(newEmail.target.value)
+                            }
+                            helperText="Email must be a valid email address"
+                            value={email}
+                            className={classes.textFieldStyle}
+                          />
+                        </Grid>
+                        <Grid
+                          item
+                          xs={12}
+                          sm={12}
+                          md={12}
+                          lg={12}
+                          xl={12}
+                          className={classes.textGridStyle}
                         >
-                          Send Message
-                        </Button>
-                      </Grid>
-                    </Paper>
+                          <TextField
+                            label="Subject"
+                            type="text"
+                            required
+                            onChange={(newSubject) =>
+                              setSubject(newSubject.target.value)
+                            }
+                            helperText="Password must contain an Uppercase letter, Lowercase letter, Number, and be at least 7 characters long"
+                            value={subject}
+                            className={classes.textFieldStyle}
+                          />
+                        </Grid>
+                        <Grid
+                          item
+                          xs={12}
+                          sm={12}
+                          md={12}
+                          lg={12}
+                          xl={12}
+                          className={classes.textGridStyle}
+                        >
+                          <FormControl className={classes.formControlStyle}>
+                            <InputLabel
+                              shrink={message !== ""}
+                              style={{ position: "absolute" }}
+                            >
+                              &nbsp;&nbsp;Message*
+                            </InputLabel>
+                            <TextareaAutosize
+                              required
+                              onChange={(newMessage) =>
+                                setMessage(newMessage.target.value)
+                              }
+                              rowsMin={15}
+                              rowsMax={15}
+                              className={classes.bigTextFieldStyle}
+                            />
+                          </FormControl>
+                        </Grid>
+                        <Grid
+                          container
+                          item
+                          xs={12}
+                          sm={12}
+                          md={12}
+                          lg={12}
+                          xl={12}
+                          className={classes.buttonGridStyle}
+                        >
+                          <Button
+                            className={classes.buttonStyle}
+                            disabled={!(email && subject && message)}
+                            type="submit"
+                          >
+                            Send Message
+                          </Button>
+                        </Grid>
+                      </Paper>
+                    </Grid>
                   </form>
                 </Grid>
               </Paper>
