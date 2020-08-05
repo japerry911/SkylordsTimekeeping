@@ -257,7 +257,6 @@ func getUsersClockingsByRange(w http.ResponseWriter, r *http.Request) {
 
 	clockings, err := GetUsersClockingsByRange(startDate, endDate, userID)
 	if err != nil {
-		fmt.Println(err)
 		http.Error(w, http.StatusText(500), http.StatusInternalServerError)
 		return
 	}
