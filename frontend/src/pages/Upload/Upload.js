@@ -137,24 +137,22 @@ const Upload = () => {
                 className={classes.gridItemStyle}
                 align="center"
               >
-                <Paper className={classes.subPaperCenteredStyle}>
-                  <input
-                    accept="text/csv"
-                    id="contained-button-file"
-                    multiple
-                    type="file"
-                    onChange={(newFile) => setFile(newFile.target.files[0])}
-                    style={{ display: "none" }}
-                  />
-                  <label
-                    htmlFor="contained-button-file"
-                    style={{ width: "100%" }}
-                  >
-                    <Button component="span" className={classes.buttonStyle}>
-                      Upload Timesheet
-                    </Button>
-                  </label>
-                </Paper>
+                <input
+                  accept="text/csv"
+                  id="contained-button-file"
+                  multiple
+                  type="file"
+                  onChange={(newFile) => setFile(newFile.target.files[0])}
+                  style={{ display: "none" }}
+                />
+                <label
+                  htmlFor="contained-button-file"
+                  style={{ width: "100%" }}
+                >
+                  <Button component="span" className={classes.buttonStyle}>
+                    Upload Timesheet
+                  </Button>
+                </label>
               </Grid>
               <Grid
                 item
@@ -166,15 +164,13 @@ const Upload = () => {
                 className={classes.gridItemStyle}
                 align="center"
               >
-                <Paper className={classes.subPaperCenteredStyle}>
-                  <Button
-                    className={classes.buttonStyle}
-                    type="submit"
-                    disabled={file === ""}
-                  >
-                    Process Timesheet
-                  </Button>
-                </Paper>
+                <Button
+                  className={classes.buttonStyle}
+                  type="submit"
+                  disabled={file === ""}
+                >
+                  Process Timesheet
+                </Button>
               </Grid>
             </form>
           </Paper>

@@ -20,7 +20,7 @@ export const useStyles = makeStyles((theme) => ({
     width: "45%",
     height: "80%",
     borderRadius: 12,
-    padding: "2rem",
+    padding: "0 2rem 2rem 2rem",
     border: `3pt solid ${theme.palette.secondary.main}`,
     display: "flex",
     flexDirection: "column",
@@ -52,27 +52,13 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     flexDirection: "column",
   },
-  subPaperCenteredStyle: {
-    width: "90%",
-    height: "40%",
-    padding: "1rem",
-    backgroundColor: theme.colors.lightGray,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 12,
-    [theme.breakpoints.only("xs")]: {
-      width: "100%",
-      padding: "1rem 0",
-    },
-  },
   buttonStyle: {
     backgroundColor: theme.palette.primary.main,
-    border: `1pt solid ${theme.palette.secondary.main}`,
+    border: `2pt solid ${theme.palette.secondary.main}`,
     color: theme.palette.secondary.main,
     width: "90%",
     borderRadius: 12,
-    padding: "1rem",
+    padding: "1.25rem",
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
       border: `1pt solid ${theme.palette.primary.main}`,
@@ -93,7 +79,7 @@ export const useStyles = makeStyles((theme) => ({
   subPaperStyle: {
     width: "90%",
     height: "80%",
-    padding: "1rem",
+    padding: "1.25rem",
     backgroundColor: theme.colors.lightGray,
     display: "flex",
     alignItems: "center",
@@ -105,13 +91,16 @@ export const useStyles = makeStyles((theme) => ({
   },
   textStyle: {
     padding: "0 1rem",
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "0.75rem",
+    },
     [theme.breakpoints.only("xs")]: {
       fontSize: "0.6rem",
     },
   },
   formStyle: {
     height: "100%",
-    width: "100%",
+    width: "90%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
