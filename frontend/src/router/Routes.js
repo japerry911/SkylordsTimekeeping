@@ -27,7 +27,7 @@ export default () => (
 
       <Route exact path="/register-user" component={CreateAccount} />
 
-      <ProtectedRoute exact path="/welcome/:userId" component={Welcome} />
+      <Route exact path="/welcome/:userId" component={Welcome} />
 
       <ProtectedRoute exact path="/clocking/:userId" component={Clocking} />
 
