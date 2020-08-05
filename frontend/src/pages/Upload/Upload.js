@@ -101,7 +101,7 @@ const Upload = () => {
             >
               <Paper className={classes.subPaperStyle}>
                 <Typography
-                  variant="body1"
+                  variant="subtitle1"
                   className={classes.textStyle}
                   display="inline"
                 >

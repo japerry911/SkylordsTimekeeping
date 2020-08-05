@@ -43,6 +43,12 @@ export const signIn = (username, password) => {
   };
 };
 
+export const signOut = () => {
+  return {
+    type: "SIGN_OUT",
+  };
+};
+
 export const createUser = (username, email, password) => {
   return (dispatch) => {
     dispatch(loadingStart());

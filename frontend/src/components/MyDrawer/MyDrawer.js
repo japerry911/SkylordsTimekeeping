@@ -9,7 +9,9 @@ import {
   NONAUTH_ROUTES_ARRAY,
   AUTH_ROUTES_ARRAY,
 } from "../../router/routeArrsObjs";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { signOut } from "../../redux/actions/usersActions";
+import { handleOpen } from "../../redux/actions/snackbarActions";
 import { useStyles } from "./DrawerStyles";
 
 const MyDrawer = ({ open, onClose }) => {
@@ -17,6 +19,7 @@ const MyDrawer = ({ open, onClose }) => {
 
   const isAuthed = useSelector((state) => state.users.authed);
   const userId = useSelector((state) => state.users.user.ID);
+  const dispatch = useDispatch();
 
   return (
     <Drawer
@@ -70,6 +73,24 @@ const MyDrawer = ({ open, onClose }) => {
                 </ListItem>
               );
             })}
+        {isAuthed ? (
+          <ListItem
+            button
+            onClick={() => {
+              dispatch(signOut());
+              dispatch(
+                handleOpen({
+                  type: "success",
+                  message: "Signed out successfully",
+                })
+              );
+              onClose();
+            }}
+            to={"/"}
+          >
+            <ListItemText>Sign Out</ListItemText>
+          </ListItem>
+        ) : null}
       </List>
     </Drawer>
   );
