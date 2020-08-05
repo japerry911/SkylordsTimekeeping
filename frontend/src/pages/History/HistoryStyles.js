@@ -2,9 +2,13 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 export const useStyles = makeStyles((theme) => ({
   mainDivStyle: {
-    minHeight: "95rem",
+    minHeight: "75rem",
     width: "100%",
-    backgroundColor: theme.palette.secondary.main,
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                      url('https://skylord-timekeeping492193924349324.s3.us-east-2.amazonaws.com/History/pexels-lukas-590022.jpg')`,
+    backgroundRepeat: "no-repeat",
+    backgroundAttachment: "fixed",
+    backgroundSize: "cover",
     paddingBottom: "3rem",
     [theme.breakpoints.only("xs")]: {
       minHeight: "70rem",
@@ -104,5 +108,8 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "3rem",
     height: "100%",
     width: "100%",
+  },
+  hiddenStyle: {
+    display: "none",
   },
 }));

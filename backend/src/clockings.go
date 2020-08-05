@@ -136,19 +136,19 @@ func ProcessUpload(r *http.Request, userID string) error {
 }
 
 // GetUsersClockingsByRange GET /api/clockings/:userID
-func GetUsersClockingsByRange(r *http.Request, userID string) ([]Clocking, error) {
-	startDate, err := time.Parse("2006-01-02T15:04:05.000Z", r.FormValue("StartDate"))
+func GetUsersClockingsByRange(startDate string, endDate string, userID string) ([]Clocking, error) {
+	startDateParsed, err := time.Parse("2006-01-02T15:04:05.000Z", startDate)
 	if err != nil {
 		return []Clocking{}, err
 	}
 
-	endDate, err := time.Parse("2006-01-02T15:04:05.000Z", r.FormValue("EndDate"))
+	endDateParsed, err := time.Parse("2006-01-02T15:04:05.000Z", endDate)
 	if err != nil {
 		return []Clocking{}, err
 	}
 
 	rows, err := db.Query("SELECT * FROM clockings WHERE ClockIn >= $1 AND ClockOut <= $2 AND UserID = $3",
-		startDate, endDate, userID)
+		startDateParsed, endDateParsed, userID)
 	if err != nil {
 		return []Clocking{}, err
 	}

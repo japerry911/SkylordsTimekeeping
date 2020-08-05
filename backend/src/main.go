@@ -34,7 +34,7 @@ func main() {
 	r.HandleFunc("/api/clockings/find-by-userID/{userID}", checkIfClockedIn).Methods("GET")
 	r.HandleFunc("/api/clockings/{ID}", clockOut).Methods("PUT")
 	r.HandleFunc("/api/clockings/upload-clockings-by-csv/{userID}", processUpload).Methods("POST")
-	r.HandleFunc("/api/clockings/{userID}", getUsersClockingsByRange).Methods("GET")
+	r.HandleFunc("/api/clockings/{userID}", getUsersClockingsByRange).Queries("startDate", "{startDate}").Queries("endDate", "{endDate}").Methods("GET")
 
 	r.Use(mux.CORSMethodMiddleware(r))
 
@@ -244,7 +244,7 @@ func processUpload(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
-// getUsersClockingsByRange : GET /api/clockings/:userID
+// getUsersClockingsByRange : GET /api/clockings/:userID?startDate&endDate
 func getUsersClockingsByRange(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" {
 		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
@@ -252,8 +252,10 @@ func getUsersClockingsByRange(w http.ResponseWriter, r *http.Request) {
 	}
 
 	userID := mux.Vars(r)["userID"]
+	startDate := mux.Vars(r)["startDate"]
+	endDate := mux.Vars(r)["endDate"]
 
-	clockings, err := GetUsersClockingsByRange(r, userID)
+	clockings, err := GetUsersClockingsByRange(startDate, endDate, userID)
 	if err != nil {
 		fmt.Println(err)
 		http.Error(w, http.StatusText(500), http.StatusInternalServerError)

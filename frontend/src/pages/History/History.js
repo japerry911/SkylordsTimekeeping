@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -7,6 +7,10 @@ import Divider from "@material-ui/core/Divider";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Button from "@material-ui/core/Button";
+import goServer from "../../api/goServer";
+import { useSelector, useDispatch } from "react-redux";
+import { handleOpen } from "../../redux/actions/snackbarActions";
+import { CSVLink } from "react-csv";
 import { useStyles } from "./HistoryStyles";
 
 const History = () => {
@@ -14,6 +18,12 @@ const History = () => {
 
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const [clockingsData, setClockingsData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const csvBtnRef = useRef(null);
+
+  const dispatch = useDispatch();
+  const userID = useSelector((state) => state.users.user.userID);
 
   const dateChange = (dates) => {
     const [start, end] = dates;
@@ -21,12 +31,43 @@ const History = () => {
     setEndDate(end);
   };
 
+  const onSubmit = (event) => {
+    event.preventDefault();
+
+    setIsLoading(true);
+
+    goServer
+      .get(
+        `/api/clockings/1?startDate=${startDate
+          .toISOString()
+          .replace(
+            /T.+Z$/,
+            "T00:00:00.000Z"
+          )}&endDate=${endDate
+          .toISOString()
+          .replace(/T.+Z$/, "T00:00:00.000Z")}`
+      )
+      .then(
+        (response) => {
+          const headers = ["ID", "UserID", "ClockIn", "ClockOut"];
+          const csvData = response.data.map((row) => [
+            row["ID"],
+            row["UserID"],
+            row["ClockIn"],
+            row["ClockOut"],
+          ]);
+          csvData.unshift(headers);
+
+          setClockingsData(csvData);
+
+          csvBtnRef.current.link.click();
+        },
+        (error) => console.log(error)
+      );
+  };
+
   return (
     <div className={classes.mainDivStyle}>
-      <HeroHeader
-        headerText="HISTORICAL DATA"
-        imgUrl="https://skylord-timekeeping492193924349324.s3.us-east-2.amazonaws.com/History/pexels-lukas-590022.jpg"
-      />
       <Grid container justify="center" className={classes.mainContainerStyle}>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12} align="center">
           <Paper className={classes.paperStyle}>
@@ -53,9 +94,9 @@ const History = () => {
               justify="space-between"
               direction="column"
             >
-              <form className={classes.formStyle}>
+              <form className={classes.formStyle} onSubmit={onSubmit}>
                 <DatePicker
-                  selected={false}
+                  selected={startDate}
                   onChange={dateChange}
                   startDate={startDate}
                   endDate={endDate}
@@ -108,6 +149,13 @@ const History = () => {
                     >
                       Export Data
                     </Button>
+                    <CSVLink
+                      data={clockingsData}
+                      filename="test.csv"
+                      className={classes.hiddenStyle}
+                      ref={csvBtnRef}
+                      target="_blank"
+                    />
                   </Grid>
                 </Grid>
               </form>
