@@ -81,7 +81,8 @@ func ClockOut(ID string, clockOutTime string) (Clocking, error) {
 		return Clocking{}, err
 	}
 
-	_, err = db.Exec("UPDATE clockings SET ID = $1, UserID = $2, ClockIn = $3, ClockOut = $4 WHERE ID = $1", clocking.ID, clocking.UserID, clocking.ClockIn, parsedTime)
+	_, err = db.Exec("UPDATE clockings SET ID = $1, UserID = $2, ClockIn = $3, ClockOut = $4 WHERE ID = $1",
+		clocking.ID, clocking.UserID, clocking.ClockIn, parsedTime)
 	if err != nil {
 		return Clocking{}, err
 	}
@@ -132,4 +133,39 @@ func ProcessUpload(r *http.Request, userID string) error {
 	}
 
 	return nil
+}
+
+// GetUsersClockingsByRange GET /api/clockings/:userID
+func GetUsersClockingsByRange(startDate string, endDate string, userID string) ([]Clocking, error) {
+	startDateParsed, err := time.Parse("2006-01-02T15:04:05.000Z", startDate)
+	if err != nil {
+		return []Clocking{}, err
+	}
+
+	endDateParsed, err := time.Parse("2006-01-02T15:04:05.000Z", endDate)
+	if err != nil {
+		return []Clocking{}, err
+	}
+
+	rows, err := db.Query("SELECT * FROM clockings WHERE ClockIn >= $1 AND ClockOut <= $2 AND UserID = $3",
+		startDateParsed, endDateParsed, userID)
+	if err != nil {
+		return []Clocking{}, err
+	}
+
+	defer rows.Close()
+	clockings := []Clocking{}
+
+	for rows.Next() {
+		clocking := Clocking{}
+
+		err = rows.Scan(&clocking.ID, &clocking.UserID, &clocking.ClockIn, &clocking.ClockOut)
+		if err != nil {
+			return []Clocking{}, err
+		}
+
+		clockings = append(clockings, clocking)
+	}
+
+	return clockings, nil
 }

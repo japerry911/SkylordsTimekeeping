@@ -115,7 +115,7 @@ const Upload = () => {
                   only the Clock In/Out data.
                   <br />
                   <br />*<strong>Max File Size</strong>: 10MB
-                  <br />*<strong>Time Format</strong>: yyyy-MM-ddThh:mm:ss.000Z
+                  <br />*<strong>Time Format</strong>: yyyy-MM-dd hh:mm:ss
                   <br />
                   (y = year, d = day, M = month, h = hour, m = minute, s =
                   second)

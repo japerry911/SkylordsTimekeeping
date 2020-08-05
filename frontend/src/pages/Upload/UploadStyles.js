@@ -61,7 +61,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: "1.25rem",
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
-      border: `1pt solid ${theme.palette.primary.main}`,
+      border: `2pt solid ${theme.palette.primary.main}`,
       color: theme.palette.primary.main,
       transition: "220ms ease-in-out",
     },
