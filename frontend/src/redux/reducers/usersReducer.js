@@ -11,6 +11,10 @@ const usersReducer = (state = INITIAL_STATE, action) => {
     case "SUCCESS":
       return { ...state, loading: false, user: action.payload, authed: true };
 
+    case "CREATE_SUCCESS": {
+      return { ...state, loading: false };
+    }
+
     case "SIGN_OUT":
       return { ...state, user: {}, authed: false };
 

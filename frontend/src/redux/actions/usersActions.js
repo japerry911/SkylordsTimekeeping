@@ -49,6 +49,12 @@ export const signOut = () => {
   };
 };
 
+export const createSuccess = () => {
+  return {
+    type: "CREATE_SUCCESS",
+  };
+};
+
 export const createUser = (username, email, password) => {
   return (dispatch) => {
     dispatch(loadingStart());
@@ -61,7 +67,7 @@ export const createUser = (username, email, password) => {
 
     return goServer.post("/api/users", formData).then(
       (response) => {
-        dispatch(success(_.pick(response.data, "ID", "UserName", "Email")));
+        dispatch(createSuccess());
         return true;
       },
       (error) => {
