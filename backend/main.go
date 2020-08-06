@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
@@ -19,13 +20,13 @@ func init() {
 
 func main() {
 	c := cors.New(cors.Options{
-		AllowedOrigins: []string{"http://localhost:3000"},
+		AllowedOrigins: []string{"http://localhost:3000", "http://skylords-timekeeper.herokuapp.com", "https://skylords-timekeeper.herokuapp.com"},
 		AllowedMethods: []string{"GET", "POST", "PUT"},
 	})
 
 	r := mux.NewRouter()
 
-	r.HandleFunc("/api/users", getUsers).Methods("GET")
+	//r.HandleFunc("/api/users", getUsers).Methods("GET")
 	r.HandleFunc("/api/users", createUser).Methods("POST")
 	r.HandleFunc("/api/users/authentication", authenticateUser).Methods("POST")
 	r.HandleFunc("/api/users/if-exists-by-username/{username}", ifExistsByUsername).Methods("GET")
@@ -35,10 +36,15 @@ func main() {
 	r.HandleFunc("/api/clockings/{ID}", clockOut).Methods("PUT")
 	r.HandleFunc("/api/clockings/upload-clockings-by-csv/{userID}", processUpload).Methods("POST")
 	r.HandleFunc("/api/clockings/{userID}", getUsersClockingsByRange).Queries("startDate", "{startDate}").Queries("endDate", "{endDate}").Methods("GET")
+	r.HandleFunc("/api/test", test).Methods("GET")
 
 	r.Use(mux.CORSMethodMiddleware(r))
 
-	log.Fatal(http.ListenAndServe(":8080", c.Handler(r)))
+	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), c.Handler(r)))
+}
+
+func test(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Hi Mom, Hi Dad from across the world."))
 }
 
 // getUsers : GET /api/users
