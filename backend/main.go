@@ -14,7 +14,7 @@ import (
 
 func init() {
 	if err := godotenv.Load(); err != nil {
-		log.Fatalln("No .env File Found")
+		fmt.Println("No .env File Found")
 	}
 }
 
@@ -213,7 +213,6 @@ func clockOut(w http.ResponseWriter, r *http.Request) {
 
 	clocking, err := ClockOut(ID, clockOutTime)
 	if err != nil {
-		fmt.Println(err)
 		http.Error(w, http.StatusText(500), http.StatusInternalServerError)
 		return
 	}

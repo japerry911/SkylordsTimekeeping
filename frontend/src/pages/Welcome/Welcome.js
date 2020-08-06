@@ -18,7 +18,7 @@ const Welcome = () => {
         alignItems="center"
       >
         <Grid item xs={12} sm={12} md={12} lg={7} xl={7} align="center">
-          <Paper className={classes.paperStyle}>
+          <Paper elevation={5} className={classes.paperStyle}>
             <figure>
               <img
                 alt="Skylord's Timekeeper Logo"

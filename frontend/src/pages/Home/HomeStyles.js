@@ -19,6 +19,7 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
   },
   paperStyle: {
+    border: `3pt solid ${theme.palette.secondary.main}`,
     backgroundColor: theme.palette.primary.main,
     width: "80%",
     borderRadius: 12,

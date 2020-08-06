@@ -18,7 +18,7 @@ const ToastBar = () => {
 
   return (
     <Fragment>
-      <Snackbar open={open} onClose={handleClick}>
+      <Snackbar open={open} onClose={handleClick} autoHideDuration={6000}>
         <Alert severity={type} onClose={handleClick}>
           {message}
         </Alert>
