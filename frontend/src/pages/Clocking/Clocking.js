@@ -22,7 +22,12 @@ const Clocking = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (userID === undefined) {
+      return;
+    }
+
     setIsLoading(true);
+
     goServer.get(`/api/clockings/find-by-userID/${userID}`).then(
       (response) => {
         if (response.status === 202) {

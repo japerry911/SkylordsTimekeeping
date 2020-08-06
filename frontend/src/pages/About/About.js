@@ -19,7 +19,7 @@ const About = () => {
       />
       <Grid container justify="center">
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12} align="center">
-          <Paper className={classes.paperStyle}>
+          <Paper elevation={5} className={classes.paperStyle}>
             <Typography variant="h2" className={classes.titleStyle}>
               ABOUT US
             </Typography>

@@ -15,7 +15,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
     paddingBottom: "3rem",
     [theme.breakpoints.only("xs")]: {
-      minHeight: "70rem",
+      minHeight: "85rem",
     },
   },
   logoImgStyle: {
@@ -26,6 +26,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   paperStyle: {
+    border: `3pt solid ${theme.palette.secondary.main}`,
     padding: "1rem 0",
     marginTop: "3rem",
     height: "100%",
@@ -45,7 +46,7 @@ export const useStyles = makeStyles((theme) => ({
       width: "90%",
     },
     [theme.breakpoints.only("xs")]: {
-      height: "88%",
+      height: "92%",
       width: "92%",
     },
   },
@@ -119,6 +120,7 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.only("xs")]: {
       width: "88%",
       padding: "0.5rem 0",
+      height: "70%",
     },
   },
   mainContainerStyle: {
