@@ -42,7 +42,9 @@ const CreateAccount = ({ history }) => {
   useEffect(() => {
     if (
       password === confirmPassword &&
-      /^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{7,}$/.test(password)
+      /^(?=.*[0-9]+.*)(?=.*[a-z]+.*)(?=.*[A-Z]+.*)[0-9a-zA-Z]{7,}$/.test(
+        password
+      )
     ) {
       dispatch(handleClose());
       setPasswordValidation(true);
