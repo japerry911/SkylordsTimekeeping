@@ -94,12 +94,10 @@ const Clocking = () => {
 
     goServer.post("/api/clockings", formData).then(
       (response) => {
-        console.log(response);
         setClockingPerformed(clockingPerformed === 0 ? 1 : 0);
         setIsLoading(false);
       },
       (error) => {
-        console.log(error);
         dispatch(
           handleOpen({
             type: "error",
