@@ -31,6 +31,14 @@ const History = () => {
     setEndDate(end);
   };
 
+  const generateRandomId = (len, arr) => {
+    var ans = "";
+    for (var i = len; i > 0; i--) {
+      ans += arr[Math.floor(Math.random() * arr.length)];
+    }
+    return ans;
+  };
+
   const onSubmit = (event) => {
     event.preventDefault();
 
@@ -171,7 +179,10 @@ const History = () => {
                         </Button>
                         <CSVLink
                           data={clockingsData}
-                          filename="test.csv"
+                          filename={`report-${generateRandomId(
+                            20,
+                            "12345abcde"
+                          )}.csv`}
                           className={classes.hiddenStyle}
                           ref={csvBtnRef}
                           target="_blank"
