@@ -48,12 +48,23 @@ const CreateAccount = ({ history }) => {
       setPasswordValidation(true);
     } else {
       setPasswordValidation(false);
-      if (password.length >= 7 && password === confirmPassword) {
+      if (password === confirmPassword && password.length !== 0) {
         dispatch(
           handleOpen({
             type: "error",
             message:
-              "Password must contain 1 Uppercase/Lowercase Letter, 1 Number, and must be at least 7 characters long.",
+              "Password must contain 1 Uppercase/Lowercase Letter, 1 Number, and must be at least 7 characters long",
+          })
+        );
+      } else if (
+        password.length > 0 &&
+        confirmPassword.length > 0 &&
+        password !== confirmPassword
+      ) {
+        dispatch(
+          handleOpen({
+            type: "error",
+            message: "Passwords do not match",
           })
         );
       }
@@ -99,6 +110,7 @@ const CreateAccount = ({ history }) => {
           message: "Email is in invalid format",
         })
       );
+      return;
     }
 
     const result = await dispatch(createUser(username, email, password));

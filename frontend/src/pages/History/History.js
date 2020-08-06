@@ -53,7 +53,7 @@ const History = () => {
             "T00:00:00.000Z"
           )}&endDate=${endDate
           .toISOString()
-          .replace(/T.+Z$/, "T00:00:00.000Z")}`
+          .replace(/T.+Z$/, "T23:59:59.000Z")}`
       )
       .then(
         (response) => {
